@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Krakens — Chaîne Officielle</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-deep: #0a0a0f;
+      --bg-mid: #111118;
+      --bg-card: #16161f;
+      --border: #1e1e2e;
+      --border-hover: #2e2e4e;
+      --green-bright: #c9f0a0;
+      --green-mid: #5ac83c;
+      --green-dark: #1a5c1a;
+      --text-primary: #e8e4dc;
+      --text-secondary: #8a8a9a;
+      --text-muted: #4a4a5a;
+      --text-very-muted: #3a3a5a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg-deep);
+      color: var(--text-primary);
+      font-family: 'Barlow', sans-serif;
+      min-height: 100vh;
+    }
+
+    /* ===== BANNER ===== */
+    .banner {
+      position: relative;
+      height: 220px;
+      background: #0a0a0f;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      padding: 0 32px 20px;
+    }
+    .banner-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    .banner-text { position: relative; z-index: 2; }
+    .band-name {
+      font-family: 'Black Han Sans', sans-serif;
+      font-size: 56px;
+      letter-spacing: 6px;
+      color: var(--green-bright);
+      text-shadow: 0 0 40px rgba(90,200,60,0.35);
+      line-height: 1;
+    }
+    .band-sub {
+      font-size: 13px;
+      color: #6a7a60;
+      font-weight: 300;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-top: 6px;
+    }
+
+    /* ===== CHANNEL HEADER ===== */
+    .channel-header {
+      background: var(--bg-mid);
+      border-bottom: 1px solid var(--border);
+      padding: 18px 32px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .avatar {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      background: #1a2a14;
+      border: 2px solid var(--green-mid);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Black Han Sans', sans-serif;
+      font-size: 22px;
+      color: var(--green-bright);
+      flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .avatar::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(90,200,60,0.18), transparent 70%);
+    }
+    .channel-info { flex: 1; }
+    .channel-name {
+      font-family: 'Black Han Sans', sans-serif;
+      font-size: 20px;
+      color: var(--green-bright);
+      letter-spacing: 2px;
+    }
+    .channel-stats {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 4px;
+      letter-spacing: 1px;
+    }
+    .sub-btn {
+      background: var(--green-bright);
+      color: var(--bg-deep);
+      border: none;
+      padding: 10px 22px;
+      font-family: 'Barlow', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      cursor: pointer;
+      border-radius: 2px;
+      text-transform: uppercase;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .sub-btn:hover { background: #dfffb8; }
+    .sub-btn:active { transform: scale(0.97); }
+
+    /* ===== NAV TABS ===== */
+    .nav-tabs {
+      background: var(--bg-mid);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      padding: 0 32px;
+    }
+    .nav-tab {
+      padding: 14px 18px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+      user-select: none;
+    }
+    .nav-tab.active { color: var(--green-bright); border-bottom-color: var(--green-mid); }
+    .nav-tab:hover:not(.active) { color: var(--text-secondary); }
+
+    /* ===== CONTENT ===== */
+    .content {
+      padding: 28px 32px;
+      max-width: 1200px;
+    }
+    .section { display: none; }
+    .section.active { display: block; }
+
+    .section-title {
+      font-family: 'Black Han Sans', sans-serif;
+      font-size: 13px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--green-mid);
+      margin-bottom: 18px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ===== VIDEO GRID ===== */
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 18px;
+      margin-bottom: 20px;
+    }
+    .video-card { cursor: pointer; }
+    .video-thumb {
+      position: relative;
+      aspect-ratio: 16/9;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .upload-overlay {
+      position: absolute;
+      inset: 0;
+      background: var(--bg-card);
+      border: 2px dashed var(--border-hover);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: var(--text-very-muted);
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .upload-overlay:hover {
+      border-color: var(--green-mid);
+      color: #7aaa60;
+      background: rgba(90,200,60,0.04);
+    }
+    .upload-overlay i { font-size: 30px; }
+    .thumb-video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .play-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0);
+      transition: background 0.2s;
+    }
+    .video-card:hover .play-overlay { background: rgba(0,0,0,0.4); }
+    .play-circle {
+      width: 48px;
+      height: 48px;
+      background: rgba(0,0,0,0.75);
+      border: 2px solid var(--green-mid);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .video-card:hover .play-circle { opacity: 1; }
+    .duration-badge {
+      position: absolute;
+      bottom: 6px;
+      right: 8px;
+      background: rgba(0,0,0,0.85);
+      color: var(--green-bright);
+      font-size: 11px;
+      padding: 2px 7px;
+      border-radius: 2px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+    .video-meta { padding: 10px 0 0; }
+    .video-title {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      line-height: 1.4;
+      margin-bottom: 4px;
+    }
+    .video-info { font-size: 11px; color: var(--text-muted); letter-spacing: 0.5px; }
+    .add-video-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: transparent;
+      border: 1px dashed var(--border-hover);
+      border-radius: 3px;
+      padding: 12px 18px;
+      color: var(--text-very-muted);
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+      font-family: 'Barlow', sans-serif;
+      margin-top: 4px;
+    }
+    .add-video-btn:hover { border-color: var(--green-mid); color: #7aaa60; }
+
+    /* ===== AUDIO ===== */
+    .audio-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 18px; }
+    .audio-track {
+      background: var(--bg-mid);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      transition: border-color 0.2s;
+    }
+    .audio-track.playing { border-color: var(--green-mid); }
+    .track-num {
+      font-family: 'Black Han Sans', sans-serif;
+      font-size: 20px;
+      color: var(--border-hover);
+      min-width: 30px;
+      text-align: center;
+    }
+    .audio-track.playing .track-num { color: var(--green-mid); }
+    .track-play-btn {
+      width: 38px;
+      height: 38px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-hover);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .track-play-btn:hover, .audio-track.playing .track-play-btn {
+      border-color: var(--green-mid);
+      background: rgba(90,200,60,0.1);
+    }
+    .track-info { flex: 1; min-width: 0; }
+    .track-name { font-size: 14px; font-weight: 500; color: var(--text-secondary); }
+    .audio-track.playing .track-name { color: var(--green-bright); }
+    .track-album { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+    .track-progress { flex: 1; max-width: 220px; }
+    .progress-bar-bg {
+      height: 3px;
+      background: var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-bottom: 4px;
+      cursor: pointer;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--green-mid);
+      border-radius: 2px;
+      width: 0%;
+      transition: width 0.4s linear;
+    }
+    .track-time { font-size: 10px; color: var(--text-muted); text-align: right; letter-spacing: 0.5px; }
+    .add-track-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: transparent;
+      border: 1px dashed var(--border-hover);
+      border-radius: 3px;
+      padding: 12px 18px;
+      color: var(--text-very-muted);
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+      font-family: 'Barlow', sans-serif;
+    }
+    .add-track-btn:hover { border-color: var(--green-mid); color: #7aaa60; }
+
+    /* ===== ABOUT ===== */
+    .about-card {
+      background: var(--bg-mid);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: 24px;
+      max-width: 680px;
+    }
+    .about-text {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.85;
+      font-weight: 300;
+      outline: none;
+    }
+    .about-hint {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .about-links { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
+    .about-link {
+      font-size: 12px;
+      color: var(--green-mid);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border: 1px solid #1e3e1e;
+      padding: 7px 14px;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+      text-decoration: none;
+    }
+    .about-link:hover { background: rgba(90,200,60,0.1); border-color: var(--green-mid); }
+
+    /* ===== HIDDEN INPUT ===== */
+    input[type="file"] { display: none; }
+
+    /* ===== MODAL VIDEO ===== */
+    .modal-bg {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-bg.open { display: flex; }
+    .modal-inner {
+      position: relative;
+      width: 90vw;
+      max-width: 900px;
+    }
+    .modal-inner video { width: 100%; border-radius: 3px; }
+    .modal-close {
+      position: absolute;
+      top: -40px;
+      right: 0;
+      background: transparent;
+      border: 1px solid var(--border-hover);
+      color: var(--text-secondary);
+      font-size: 18px;
+      width: 32px;
+      height: 32px;
+      border-radius: 2px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .modal-close:hover { border-color: var(--green-mid); color: var(--green-bright); }
+  </style>
+</head>
+<body>
+
+  <!-- BANNER -->
+  <div class="banner">
+    <svg class="banner-svg" viewBox="0 0 1200 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <radialGradient id="glow1" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#5ac83c" stop-opacity="0.18"/>
+          <stop offset="100%" stop-color="#5ac83c" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <ellipse cx="900" cy="110" rx="300" ry="180" fill="url(#glow1)"/>
+      <path d="M0,180 Q150,60 350,150 Q500,220 650,80 Q780,-20 950,110 Q1060,180 1200,80" stroke="#5ac83c" stroke-width="2.5" fill="none" opacity="0.25"/>
+      <path d="M0,200 Q100,100 280,170 Q440,240 600,100 Q740,0 900,130 Q1020,210 1200,120" stroke="#3a8c2a" stroke-width="1.5" fill="none" opacity="0.2"/>
+      <path d="M200,220 Q350,90 520,180 Q680,260 820,100 Q950,0 1100,150" stroke="#1a5c1a" stroke-width="3" fill="none" opacity="0.3"/>
+      <circle cx="350" cy="150" r="5" fill="#5ac83c" opacity="0.5"/>
+      <circle cx="650" cy="80" r="4" fill="#5ac83c" opacity="0.4"/>
+      <circle cx="950" cy="110" r="7" fill="#5ac83c" opacity="0.35"/>
+      <circle cx="1100" cy="150" r="3" fill="#c9f0a0" opacity="0.4"/>
+    </svg>
+    <div class="banner-text">
+      <div class="band-name">THE KRAKENS</div>
+      <div class="band-sub">Metal · Profondeurs inconnues</div>
+    </div>
+  </div>
+
+  <!-- CHANNEL HEADER -->
+  <div class="channel-header">
+    <div class="avatar">TK</div>
+    <div class="channel-info">
+      <div class="channel-name">THE KRAKENS</div>
+      <div class="channel-stats" id="stats-line">@thekrakens · 0 vidéos · 0 titres</div>
+    </div>
+    <button class="sub-btn" onclick="toggleSub(this)">S'abonner</button>
+  </div>
+
+  <!-- NAV TABS -->
+  <nav class="nav-tabs" role="tablist">
+    <div class="nav-tab active" role="tab" tabindex="0" onclick="showSection('videos', this)" onkeydown="if(event.key==='Enter')showSection('videos',this)">Vidéos</div>
+    <div class="nav-tab" role="tab" tabindex="0" onclick="showSection('music', this)" onkeydown="if(event.key==='Enter')showSection('music',this)">Musique</div>
+    <div class="nav-tab" role="tab" tabindex="0" onclick="showSection('about', this)" onkeydown="if(event.key==='Enter')showSection('about',this)">À propos</div>
+  </nav>
+
+  <!-- CONTENT -->
+  <main class="content">
+
+    <!-- VIDEOS -->
+    <section id="sec-videos" class="section active" aria-label="Vidéos">
+      <div class="section-title">Vidéos</div>
+      <div class="video-grid" id="video-grid"></div>
+      <button class="add-video-btn" onclick="addVideoSlot()">
+        <i class="ti ti-plus" aria-hidden="true"></i> Ajouter une vidéo
+      </button>
+    </section>
+
+    <!-- MUSIC -->
+    <section id="sec-music" class="section" aria-label="Musique">
+      <div class="section-title">Titres Audio MP3</div>
+      <div class="audio-list" id="audio-list"></div>
+      <button class="add-track-btn" onclick="addTrack()">
+        <i class="ti ti-plus" aria-hidden="true"></i> Ajouter un titre
+      </button>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="sec-about" class="section" aria-label="À propos">
+      <div class="section-title">À propos du groupe</div>
+      <div class="about-card">
+        <p class="about-text" contenteditable="true" id="about-text">
+          The Krakens est un groupe de metal fondé dans les profondeurs... Éditez ce texte pour présenter votre groupe, votre style, vos influences, vos dates de concerts, etc.
+        </p>
+        <p class="about-hint">✎ Cliquez sur le texte pour modifier</p>
+        <div class="about-links">
+          <a class="about-link" href="#" onclick="return false">Instagram</a>
+          <a class="about-link" href="#" onclick="return false">Spotify</a>
+          <a class="about-link" href="#" onclick="return false">Bandcamp</a>
+          <a class="about-link" href="#" onclick="return false">Contact</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- VIDEO MODAL -->
+  <div class="modal-bg" id="video-modal" onclick="closeModal(event)">
+    <div class="modal-inner">
+      <button class="modal-close" onclick="closeModalDirect()" aria-label="Fermer">
+        <i class="ti ti-x" aria-hidden="true"></i>
+      </button>
+      <video id="modal-video" controls></video>
+    </div>
+  </div>
+
+  <!-- Hidden file inputs -->
+  <input type="file" id="video-input" accept="video/*" onchange="handleVideoFile(event)" />
+  <input type="file" id="audio-input" accept="audio/mp3,audio/*" onchange="handleAudioFile(event)" />
+
+  <script>
+    // ─── STATE ───────────────────────────────────────────────
+    let videoSlots = [];
+    let videoCounter = 0;
+    let currentVideoTarget = null;
+
+    let trackSlots = [];
+    let trackCounter = 0;
+    let currentAudioTarget = null;
+    let audios = {};
+    let currentPlayingId = null;
+
+    // ─── INIT ─────────────────────────────────────────────────
+    window.addEventListener('DOMContentLoaded', () => {
+      addVideoSlot(); addVideoSlot(); addVideoSlot(); addVideoSlot();
+      addTrack(); addTrack();
+      updateStats();
+    });
+
+    // ─── NAVIGATION ──────────────────────────────────────────
+    function showSection(name, el) {
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      document.getElementById('sec-' + name).classList.add('active');
+      document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+      el.classList.add('active');
+    }
+
+    // ─── SUBSCRIBE ───────────────────────────────────────────
+    let subscribed = false;
+    function toggleSub(btn) {
+      subscribed = !subscribed;
+      btn.textContent = subscribed ? 'Abonné ✓' : "S'abonner";
+      btn.style.background = subscribed ? '#2a4a1a' : 'var(--green-bright)';
+      btn.style.color = subscribed ? 'var(--green-bright)' : 'var(--bg-deep)';
+      btn.style.border = subscribed ? '1px solid var(--green-mid)' : 'none';
+    }
+
+    // ─── STATS ───────────────────────────────────────────────
+    function updateStats() {
+      const vCount = videoSlots.filter(s => s.hasFile).length;
+      const aCount = trackSlots.filter(s => s.hasFile).length;
+      document.getElementById('stats-line').textContent =
+        `@thekrakens · ${vCount} vidéo${vCount!==1?'s':''} · ${aCount} titre${aCount!==1?'s':''}`;
+    }
+
+    // ─── VIDEO SLOTS ─────────────────────────────────────────
+    function addVideoSlot() {
+      videoCounter++;
+      const id = videoCounter;
+      videoSlots.push({ id, hasFile: false });
+
+      const card = document.createElement('div');
+      card.className = 'video-card';
+      card.id = 'vcard-' + id;
+
+      card.innerHTML = `
+        <div class="video-thumb" id="vthumb-${id}">
+          <div class="upload-overlay" id="voverlay-${id}" onclick="triggerVideoUpload(${id})">
+            <i class="ti ti-video-plus" aria-hidden="true"></i>
+            <span>Importer une vidéo</span>
+          </div>
+        </div>
+        <div class="video-meta">
+          <div class="video-title" id="vtitle-${id}" style="color:var(--text-very-muted)">Slot disponible</div>
+          <div class="video-info" id="vinfo-${id}">Cliquez pour importer</div>
+        </div>
+      `;
+      document.getElementById('video-grid').appendChild(card);
+    }
+
+    function triggerVideoUpload(id) {
+      currentVideoTarget = id;
+      document.getElementById('video-input').click();
+    }
+
+    function handleVideoFile(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const id = currentVideoTarget;
+      const thumb = document.getElementById('vthumb-' + id);
+      const overlay = document.getElementById('voverlay-' + id);
+
+      overlay.remove();
+      const slot = videoSlots.find(s => s.id === id);
+      if (slot) { slot.hasFile = true; slot.url = URL.createObjectURL(file); slot.name = file.name; }
+
+      const vid = document.createElement('video');
+      vid.src = slot.url;
+      vid.className = 'thumb-video';
+      vid.muted = true;
+      vid.preload = 'metadata';
+      thumb.appendChild(vid);
+
+      const playOvl = document.createElement('div');
+      playOvl.className = 'play-overlay';
+      playOvl.innerHTML = `<div class="play-circle"><i class="ti ti-player-play" style="font-size:18px;color:var(--green-bright)" aria-hidden="true"></i></div>`;
+      playOvl.onclick = () => openModal(slot.url);
+      thumb.appendChild(playOvl);
+
+      vid.addEventListener('loadedmetadata', () => {
+        const d = Math.round(vid.duration);
+        const m = Math.floor(d/60), s = d%60;
+        const badge = document.createElement('div');
+        badge.className = 'duration-badge';
+        badge.textContent = m + ':' + String(s).padStart(2,'0');
+        thumb.appendChild(badge);
+      });
+
+      const cleanName = file.name.replace(/\.[^.]+$/, '');
+      document.getElementById('vtitle-' + id).textContent = cleanName;
+      document.getElementById('vtitle-' + id).style.color = 'var(--text-secondary)';
+      document.getElementById('vinfo-' + id).textContent = 'Vidéo locale';
+
+      updateStats();
+      e.target.value = '';
+    }
+
+    // ─── VIDEO MODAL ─────────────────────────────────────────
+    function openModal(url) {
+      const modal = document.getElementById('video-modal');
+      const vid = document.getElementById('modal-video');
+      vid.src = url;
+      modal.classList.add('open');
+      vid.play();
+    }
+
+    function closeModal(e) {
+      if (e.target === document.getElementById('video-modal')) closeModalDirect();
+    }
+
+    function closeModalDirect() {
+      const modal = document.getElementById('video-modal');
+      const vid = document.getElementById('modal-video');
+      vid.pause();
+      vid.src = '';
+      modal.classList.remove('open');
+    }
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeModalDirect();
+    });
+
+    // ─── AUDIO TRACKS ────────────────────────────────────────
+    function addTrack() {
+      trackCounter++;
+      const id = trackCounter;
+      trackSlots.push({ id, hasFile: false });
+
+      const track = document.createElement('div');
+      track.className = 'audio-track';
+      track.id = 'track-' + id;
+
+      track.innerHTML = `
+        <span class="track-num">${String(id).padStart(2,'0')}</span>
+        <div class="track-play-btn" id="tplay-${id}" onclick="triggerAudioUpload(${id})" title="Importer un MP3" role="button" aria-label="Importer un MP3">
+          <i class="ti ti-upload" style="font-size:16px;color:var(--text-muted)" aria-hidden="true"></i>
+        </div>
+        <div class="track-info">
+          <div class="track-name" id="tname-${id}" style="color:var(--text-very-muted)">Titre ${id} — cliquez pour importer</div>
+          <div class="track-album" id="talbum-${id}">Aucun fichier MP3</div>
+        </div>
+      `;
+      document.getElementById('audio-list').appendChild(track);
+    }
+
+    function triggerAudioUpload(id) {
+      currentAudioTarget = id;
+      document.getElementById('audio-input').click();
+    }
+
+    function handleAudioFile(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const id = currentAudioTarget;
+
+      if (audios[id]) { audios[id].pause(); try { URL.revokeObjectURL(audios[id].src); } catch(_){} }
+
+      const audio = new Audio(URL.createObjectURL(file));
+      audios[id] = audio;
+
+      const slot = trackSlots.find(s => s.id === id);
+      if (slot) slot.hasFile = true;
+
+      const trackEl = document.getElementById('track-' + id);
+      const playBtn = document.getElementById('tplay-' + id);
+      const cleanName = file.name.replace(/\.[^.]+$/, '');
+
+      document.getElementById('tname-' + id).textContent = cleanName;
+      document.getElementById('tname-' + id).style.color = 'var(--text-secondary)';
+      document.getElementById('talbum-' + id).textContent = 'MP3 importé';
+
+      playBtn.innerHTML = `<i class="ti ti-player-play" style="font-size:16px;color:var(--green-mid)" aria-hidden="true"></i>`;
+      playBtn.onclick = () => toggleAudio(id);
+      playBtn.title = 'Lecture / Pause';
+
+      // Add progress bar if not there
+      if (!trackEl.querySelector('.track-progress')) {
+        const prog = document.createElement('div');
+        prog.className = 'track-progress';
+        prog.innerHTML = `
+          <div class="progress-bar-bg" onclick="seekAudio(event, ${id})" title="Cliquer pour déplacer la lecture">
+            <div class="progress-bar-fill" id="tprog-${id}"></div>
+          </div>
+          <div class="track-time" id="ttime-${id}">0:00 / 0:00</div>
+        `;
+        trackEl.appendChild(prog);
+      }
+
+      audio.addEventListener('loadedmetadata', () => {
+        const d = Math.floor(audio.duration);
+        document.getElementById('ttime-' + id).textContent = '0:00 / ' + fmt(d);
+      });
+
+      audio.addEventListener('timeupdate', () => {
+        if (!audio.duration) return;
+        const pct = (audio.currentTime / audio.duration) * 100;
+        const fillEl = document.getElementById('tprog-' + id);
+        if (fillEl) fillEl.style.width = Math.round(pct) + '%';
+        const timeEl = document.getElementById('ttime-' + id);
+        if (timeEl) timeEl.textContent = fmt(audio.currentTime) + ' / ' + fmt(audio.duration);
+      });
+
+      audio.addEventListener('ended', () => {
+        trackEl.classList.remove('playing');
+        playBtn.innerHTML = `<i class="ti ti-player-play" style="font-size:16px;color:var(--green-mid)" aria-hidden="true"></i>`;
+        const fillEl = document.getElementById('tprog-' + id);
+        if (fillEl) fillEl.style.width = '0%';
+        currentPlayingId = null;
+      });
+
+      updateStats();
+      e.target.value = '';
+    }
+
+    function toggleAudio(id) {
+      const audio = audios[id];
+      if (!audio) return;
+      const trackEl = document.getElementById('track-' + id);
+      const playBtn = document.getElementById('tplay-' + id);
+
+      if (currentPlayingId && currentPlayingId !== id) {
+        const prev = audios[currentPlayingId];
+        if (prev) { prev.pause(); }
+        const prevEl = document.getElementById('track-' + currentPlayingId);
+        if (prevEl) {
+          prevEl.classList.remove('playing');
+          const prevBtn = document.getElementById('tplay-' + currentPlayingId);
+          if (prevBtn) prevBtn.innerHTML = `<i class="ti ti-player-play" style="font-size:16px;color:var(--green-mid)" aria-hidden="true"></i>`;
+        }
+      }
+
+      if (audio.paused) {
+        audio.play();
+        trackEl.classList.add('playing');
+        playBtn.innerHTML = `<i class="ti ti-player-pause" style="font-size:16px;color:var(--green-bright)" aria-hidden="true"></i>`;
+        currentPlayingId = id;
+      } else {
+        audio.pause();
+        trackEl.classList.remove('playing');
+        playBtn.innerHTML = `<i class="ti ti-player-play" style="font-size:16px;color:var(--green-mid)" aria-hidden="true"></i>`;
+        currentPlayingId = null;
+      }
+    }
+
+    function seekAudio(e, id) {
+      const audio = audios[id];
+      if (!audio || !audio.duration) return;
+      const rect = e.currentTarget.getBoundingClientRect();
+      const pct = (e.clientX - rect.left) / rect.width;
+      audio.currentTime = pct * audio.duration;
+    }
+
+    function fmt(s) {
+      const t = Math.floor(s);
+      return Math.floor(t/60) + ':' + String(t%60).padStart(2,'0');
+    }
+  </script>
+</body>
+</html>
