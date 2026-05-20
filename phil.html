@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Phil – Biographie · Les Krakens</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Crimson+Pro:wght@300;400;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #0d0d0d; color: #e8e2d9; font-family: 'Crimson Pro', Georgia, serif; min-height: 100vh; }
+    header { position: relative; overflow: hidden; background: #111; padding: 80px 40px 60px; text-align: center; border-bottom: 1px solid #2a2a2a; }
+    header::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 0%, rgba(180,30,30,0.18) 0%, transparent 70%); pointer-events: none; }
+    .band-name { font-size: 13px; font-weight: 300; letter-spacing: 5px; text-transform: uppercase; color: #b41e1e; margin-bottom: 18px; }
+    h1 { font-family: 'Playfair Display', serif; font-size: clamp(60px, 10vw, 110px); font-weight: 700; color: #f0ebe3; line-height: 1; letter-spacing: -2px; }
+    .sub { font-size: 14px; font-weight: 300; letter-spacing: 4px; text-transform: uppercase; color: #666; margin-top: 16px; }
+    .lang-switcher { position: absolute; top: 24px; right: 32px; display: flex; gap: 6px; z-index: 10; }
+    .lang-btn { background: transparent; border: 1px solid #333; color: #666; font-family: 'Crimson Pro', serif; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; padding: 6px 14px; cursor: pointer; transition: all 0.2s; border-radius: 2px; }
+    .lang-btn.active { border-color: #b41e1e; color: #b41e1e; }
+    .lang-btn:hover { border-color: #888; color: #ccc; }
+    .nav-back { position: absolute; top: 24px; left: 32px; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: #555; text-decoration: none; transition: color 0.2s; }
+    .nav-back:hover { color: #b41e1e; }
+    main { max-width: 780px; margin: 0 auto; padding: 70px 40px 100px; }
+    .bio-text { font-size: 20px; font-weight: 300; line-height: 1.9; color: #cec8bf; }
+    .bio-text p + p { margin-top: 1.8em; }
+    .bio-text em { font-style: italic; font-family: 'Playfair Display', serif; font-size: 21px; color: #e8e2d9; }
+    .section-divider { display: flex; align-items: center; gap: 16px; margin: 3rem 0 2rem; }
+    .section-divider span { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #b41e1e; white-space: nowrap; }
+    .section-divider::before, .section-divider::after { content: ''; flex: 1; height: 1px; background: #2a2a2a; }
+    .timeline { margin-top: 60px; padding-top: 40px; border-top: 1px solid #222; }
+    .timeline-title { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #555; margin-bottom: 24px; }
+    .timeline-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+    .t-item { display: flex; align-items: center; gap: 8px; background: #161616; border: 1px solid #222; border-radius: 4px; padding: 8px 14px; }
+    .t-year { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 700; color: #b41e1e; }
+    .t-label { font-size: 14px; font-weight: 300; color: #999; }
+    footer { text-align: center; padding: 30px; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: #333; border-top: 1px solid #1a1a1a; }
+    [data-lang] { display: none; }
+    [data-lang].visible { display: block; }
+    /* PHOTO */
+    .member-photo-wrap { display: flex; justify-content: center; margin-bottom: 50px; }
+    .member-photo { width: 260px; height: 320px; object-fit: cover; object-position: top; border-radius: 4px; border: 1px solid #2a2a2a; display: block; }
+    .member-photo-placeholder { width: 260px; height: 320px; background: #111; border: 2px dashed #2a2a2a; border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; color: #333; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; }
+    .member-photo-placeholder svg { opacity: 0.3; }
+  </style>
+</head>
+<body>
+  <header>
+    <a class="nav-back" href="index.html">← Les Krakens</a>
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLang('fr')">FR</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+    </div>
+    <p class="band-name">Les Krakens</p>
+    <h1>Phil</h1>
+    <p class="sub" data-lang="fr" style="display:block">Guitariste &nbsp;·&nbsp; Biographie</p>
+    <p class="sub" data-lang="en">Lead Guitarist &nbsp;·&nbsp; Biography</p>
+  </header>
+
+  <main>
+    <!-- PHOTO — remplace "images/phil.jpg" par le vrai fichier quand tu l'as -->
+    <div class="member-photo-wrap">
+      <div class="member-photo-placeholder">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        Photo de Phil
+      </div>
+    </div>
+    <!-- Quand tu as la photo : remplace le bloc ci-dessus par :
+    <div class="member-photo-wrap">
+      <img class="member-photo" src="images/phil.jpg" alt="Phil – Guitariste Les Krakens" />
+    </div>
+    -->
+    <!-- FRANÇAIS -->
+    <div data-lang="fr" class="visible">
+      <div class="bio-text">
+        <p>Né Philippe le 21 décembre 1966 à Chambéry, Phil découvre la guitare à 16 ans — et ne la lâchera plus. Dès la fin des années 80, il s'impose comme guitariste soliste au sein de <em>Nerve of Steels</em>, puis devient l'architecte du groupe <em>Ozone</em>, où il cumule les rôles de soliste et compositeur. Au début des années 90, il fonde <em>Saphyr</em>, groupe dans lequel il est seul aux guitares et signe toutes les compositions. Ses influences de l'époque dessinent déjà un paysage sonore ambitieux : de <em>Kiss</em> et <em>Alice Cooper</em> jusqu'à <em>Iron Maiden</em> et <em>Motörhead</em>. Son arsenal ? Une <em>Les Paul Gibson</em> branchée dans un <em>Marshall JCM 800</em> 3 corps tête à transistor — un son tranchant, sans compromis.</p>
+        <p>Au début des années 2000, Saphyr tire sa révérence. Mais Phil ne reste jamais longtemps les mains vides. De 2005 à 2018, il relance l'aventure sous le nom <em>Saphyr Deuce</em>, mêlant reprises rock et hard rock à de nouvelles compositions. Sa palette évolue : il délaisse les amplis au profit des processeurs <em>Line 6</em>, et ses guitares migrent vers des superstrats signées <em>Charvel</em>, <em>Jackson</em> et <em>Schecter</em>, équipées de vibrato <em>Floyd Rose</em>. Son oreille, elle, s'ouvre de plus en plus vers le power metal et les nouveaux territoires du metal.</p>
+        <p>En février 2022, Phil rejoint <em>Les Krakens</em> comme guitariste soliste aux côtés d'un second guitariste rythmique. Dès lors, il devient le moteur de l'évolution du groupe : sous son influence, les Krakens s'orientent progressivement vers un metal de plus en plus affirmé, nourri de compositions originales. Phil explore désormais les guitares <em>7 et 8 cordes</em>, repoussant encore les frontières d'un son qui n'a pas fini de grandir.</p>
+      </div>
+      <div class="timeline">
+        <p class="timeline-title">Repères</p>
+        <div class="timeline-grid">
+          <div class="t-item"><span class="t-year">1966</span><span class="t-label">Naissance · Chambéry</span></div>
+          <div class="t-item"><span class="t-year">1982</span><span class="t-label">Découverte de la guitare</span></div>
+          <div class="t-item"><span class="t-year">Fin 80s</span><span class="t-label">Nerve of Steels · Ozone</span></div>
+          <div class="t-item"><span class="t-year">Début 90s</span><span class="t-label">Saphyr</span></div>
+          <div class="t-item"><span class="t-year">2005–2018</span><span class="t-label">Saphyr Deuce</span></div>
+          <div class="t-item"><span class="t-year">Fév. 2022</span><span class="t-label">Rejoint Les Krakens</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ENGLISH -->
+    <div data-lang="en">
+      <div class="bio-text">
+        <p>Born Philippe on December 21, 1966 in Chambéry, Phil picked up the guitar at 16 — and never put it down. By the late 1980s, he had established himself as lead guitarist of <em>Nerve of Steels</em>, before becoming the driving force behind <em>Ozone</em>, where he took on the dual role of lead guitarist and composer. In the early 90s, he founded <em>Saphyr</em>, a band in which he was the sole guitarist and wrote all the material. His influences at the time already painted an ambitious sonic landscape — from <em>Kiss</em> and <em>Alice Cooper</em> to <em>Iron Maiden</em> and <em>Motörhead</em>. His weapon of choice: a <em>Gibson Les Paul</em> through a <em>Marshall JCM 800</em> three-piece transistor head — sharp, uncompromising tone.</p>
+        <p>Saphyr wound down in the early 2000s, but Phil rarely stays idle for long. From 2005 to 2018, he relaunched under the name <em>Saphyr Deuce</em>, blending rock and hard rock covers with original compositions. His setup evolved with him: he traded amps for <em>Line 6</em> processors, and his guitars shifted toward superstrats from <em>Charvel</em>, <em>Jackson</em> and <em>Schecter</em>, all fitted with <em>Floyd Rose</em> vibrato systems. His ear meanwhile opened increasingly toward power metal and new branches of the metal world.</p>
+        <p>In February 2022, Phil joined <em>Les Krakens</em> as lead guitarist alongside a rhythm guitarist. From that point on, he became the engine of the band's evolution — under his influence, the Krakens have moved steadily toward a heavier, more original sound. Phil now explores <em>7- and 8-string guitars</em>, pushing the boundaries of a sound that shows no sign of stopping.</p>
+      </div>
+      <div class="timeline">
+        <p class="timeline-title">Timeline</p>
+        <div class="timeline-grid">
+          <div class="t-item"><span class="t-year">1966</span><span class="t-label">Born · Chambéry</span></div>
+          <div class="t-item"><span class="t-year">1982</span><span class="t-label">First guitar</span></div>
+          <div class="t-item"><span class="t-year">Late 80s</span><span class="t-label">Nerve of Steels · Ozone</span></div>
+          <div class="t-item"><span class="t-year">Early 90s</span><span class="t-label">Saphyr</span></div>
+          <div class="t-item"><span class="t-year">2005–2018</span><span class="t-label">Saphyr Deuce</span></div>
+          <div class="t-item"><span class="t-year">Feb. 2022</span><span class="t-label">Joins Les Krakens</span></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>Les Krakens &nbsp;·&nbsp; Lyon</footer>
+  <script>
+    function setLang(lang) {
+      document.querySelectorAll('[data-lang]').forEach(el => el.classList.toggle('visible', el.dataset.lang === lang));
+      document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.toggle('active', btn.textContent.toLowerCase() === lang));
+      document.documentElement.lang = lang;
+    }
+  </script>
+</body>
+</html>

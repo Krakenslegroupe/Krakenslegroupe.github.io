@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bob – Biographie · Les Krakens</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Crimson+Pro:wght@300;400;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #0d0d0d; color: #e8e2d9; font-family: 'Crimson Pro', Georgia, serif; min-height: 100vh; }
+    header { position: relative; overflow: hidden; background: #111; padding: 80px 40px 60px; text-align: center; border-bottom: 1px solid #2a2a2a; }
+    header::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 0%, rgba(180,30,30,0.18) 0%, transparent 70%); pointer-events: none; }
+    .band-name { font-size: 13px; font-weight: 300; letter-spacing: 5px; text-transform: uppercase; color: #b41e1e; margin-bottom: 18px; }
+    h1 { font-family: 'Playfair Display', serif; font-size: clamp(60px, 10vw, 110px); font-weight: 700; color: #f0ebe3; line-height: 1; letter-spacing: -2px; }
+    .sub { font-size: 14px; font-weight: 300; letter-spacing: 4px; text-transform: uppercase; color: #666; margin-top: 16px; }
+    /* Language switcher */
+    .lang-switcher { position: absolute; top: 24px; right: 32px; display: flex; gap: 6px; z-index: 10; }
+    .lang-btn { background: transparent; border: 1px solid #333; color: #666; font-family: 'Crimson Pro', serif; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; padding: 6px 14px; cursor: pointer; transition: all 0.2s; border-radius: 2px; }
+    .lang-btn.active { border-color: #b41e1e; color: #b41e1e; }
+    .lang-btn:hover { border-color: #888; color: #ccc; }
+    /* Nav back */
+    .nav-back { position: absolute; top: 24px; left: 32px; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: #555; text-decoration: none; transition: color 0.2s; }
+    .nav-back:hover { color: #b41e1e; }
+    main { max-width: 780px; margin: 0 auto; padding: 70px 40px 100px; }
+    .bio-text { font-size: 20px; font-weight: 300; line-height: 1.9; color: #cec8bf; }
+    .bio-text p + p { margin-top: 1.8em; }
+    .bio-text em { font-style: italic; font-family: 'Playfair Display', serif; font-size: 21px; color: #e8e2d9; }
+    .section-divider { display: flex; align-items: center; gap: 16px; margin: 3rem 0 2rem; }
+    .section-divider span { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #b41e1e; white-space: nowrap; }
+    .section-divider::before, .section-divider::after { content: ''; flex: 1; height: 1px; background: #2a2a2a; }
+    .timeline { margin-top: 60px; padding-top: 40px; border-top: 1px solid #222; }
+    .timeline-title { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #555; margin-bottom: 24px; }
+    .timeline-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+    .t-item { display: flex; align-items: center; gap: 8px; background: #161616; border: 1px solid #222; border-radius: 4px; padding: 8px 14px; }
+    .t-year { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 700; color: #b41e1e; }
+    .t-label { font-size: 14px; font-weight: 300; color: #999; }
+    footer { text-align: center; padding: 30px; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: #333; border-top: 1px solid #1a1a1a; }
+    [data-lang] { display: none; }
+    [data-lang].visible { display: block; }
+    /* PHOTO */
+    .member-photo-wrap { display: flex; justify-content: center; margin-bottom: 50px; }
+    .member-photo { width: 260px; height: 320px; object-fit: cover; object-position: top; border-radius: 4px; border: 1px solid #2a2a2a; display: block; }
+    .member-photo-placeholder { width: 260px; height: 320px; background: #111; border: 2px dashed #2a2a2a; border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; color: #333; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; }
+    .member-photo-placeholder svg { opacity: 0.3; }
+  </style>
+</head>
+<body>
+  <header>
+    <a class="nav-back" href="index.html">← Les Krakens</a>
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLang('fr')">FR</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+    </div>
+    <p class="band-name">Les Krakens</p>
+    <h1>Bob</h1>
+    <p class="sub" data-lang="fr" style="display:block">Batteur &nbsp;·&nbsp; Biographie</p>
+    <p class="sub" data-lang="en">Drummer &nbsp;·&nbsp; Biography</p>
+  </header>
+
+  <main>
+    <!-- PHOTO — remplace "images/bob.jpg" par le vrai fichier quand tu l'as -->
+    <div class="member-photo-wrap">
+      <div class="member-photo-placeholder">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        Photo de Bob
+      </div>
+    </div>
+    <!-- Quand tu as la photo : remplace le bloc ci-dessus par :
+    <div class="member-photo-wrap">
+      <img class="member-photo" src="images/bob.jpg" alt="Bob – Batteur Les Krakens" />
+    </div>
+    -->
+    <!-- FRANÇAIS -->
+    <div data-lang="fr" class="visible">
+      <div class="bio-text">
+        <p>Né le 30 mai 1969, Bob frappe sa première peau bien avant de savoir où ça le mènera. Batteur depuis 45 ans, il monte sur scène pour de vrai dès l'âge de 23 ans, dans des groupes semi-professionnels qui ne font pas dans la demi-mesure. Il foule les planches du <em>Transbordeur</em>, du <em>Glob</em>, assure des premières parties remarquées — dont celle de <em>Satan Joker</em> — et forge son caractère de scène dans les groupes <em>Runic</em> puis <em>The Bar Is Open</em>.</p>
+        <p>Son jeu puise à des sources exigeantes : <em>Buddy Rich</em>, le maître absolu, lui enseigne que la batterie est un art total. <em>Nicko McBrain</em> d'Iron Maiden l'ancre dans un groove de fer. <em>Munetaka Higuchi</em> de Loudness lui insuffle technique et flamboyance. <em>Scott Rockenfield</em> lui apprend la justesse. Derrière ses fûts <em>Tama</em> ou <em>Sonor</em>, avec ses cymbales <em>Paiste</em> ou <em>Zildjian</em>, Bob traverse les genres sans jamais perdre le fil : d'AC/DC à Motörhead, du glam au heavy, en passant par le power et le speed metal.</p>
+        <div class="section-divider"><span>Les Krakens</span></div>
+        <p>En 2019, Bob rejoint <em>Les Krakens</em> — le groupe fondé cette même année par Glyn — et apporte avec lui des décennies d'expérience et une frappe aussi précise que dévastatrice. Ensemble, ils construisent un mur du son solide, sur lequel viennent s'appuyer les guitares de plus en plus metal du groupe. En septembre 2025, l'arrivée de <em>Ned</em> à la basse vient sceller une formation définitive, puissante et soudée. Depuis, c'est Bob qui fait trembler les planches — avec toujours la même conviction : une baguette levée, et le reste suit.</p>
+      </div>
+      <div class="timeline">
+        <p class="timeline-title">Repères</p>
+        <div class="timeline-grid">
+          <div class="t-item"><span class="t-year">1969</span><span class="t-label">Naissance</span></div>
+          <div class="t-item"><span class="t-year">~1980</span><span class="t-label">Premiers fûts</span></div>
+          <div class="t-item"><span class="t-year">~1992</span><span class="t-label">Scènes semi-pro</span></div>
+          <div class="t-item"><span class="t-year">Runic</span><span class="t-label">Premier groupe</span></div>
+          <div class="t-item"><span class="t-year">The Bar Is Open</span><span class="t-label">Groupe suivant</span></div>
+          <div class="t-item"><span class="t-year">Transbordeur · Glob</span><span class="t-label">Grandes salles</span></div>
+          <div class="t-item"><span class="t-year">2019</span><span class="t-label">Rejoint Les Krakens</span></div>
+          <div class="t-item"><span class="t-year">Sept. 2025</span><span class="t-label">Arrivée de Ned</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ENGLISH -->
+    <div data-lang="en">
+      <div class="bio-text">
+        <p>Born on May 30, 1969, Bob started hitting drums long before he knew where it would take him. A drummer for 45 years, he hit the stage for real at 23, playing in semi-professional bands that meant serious business. He performed at the <em>Transbordeur</em> and the <em>Glob</em>, opened for acts including <em>Satan Joker</em>, and built his stage identity through the bands <em>Runic</em> and <em>The Bar Is Open</em>.</p>
+        <p>His playing draws from the most demanding sources: <em>Buddy Rich</em>, the undisputed master, showed him that drumming is a complete art form. <em>Nicko McBrain</em> of Iron Maiden gave him an iron sense of rhythm. <em>Munetaka Higuchi</em> of Loudness inspired his technical flair and stage presence. <em>Scott Rockenfield</em> taught him precision. Behind his <em>Tama</em> or <em>Sonor</em> kit, crashing <em>Paiste</em> or <em>Zildjian</em> cymbals, Bob moves freely across genres without ever losing the groove — from AC/DC to Motörhead, through glam, heavy, power and speed metal.</p>
+        <div class="section-divider"><span>Les Krakens</span></div>
+        <p>In 2019, Bob joined <em>Les Krakens</em> — founded that same year by Glyn — bringing with him decades of experience and a drumming style as precise as it is devastating. Together, they built a solid rhythmic foundation for the band's increasingly heavy guitar sound to rest on. In September 2025, the arrival of <em>Ned</em> on bass completed the lineup, forging a tight, powerful unit ready for anything. Since then, Bob has been making the stage shake — with the same conviction he's always had: one stick raised, and everything else falls into place.</p>
+      </div>
+      <div class="timeline">
+        <p class="timeline-title">Timeline</p>
+        <div class="timeline-grid">
+          <div class="t-item"><span class="t-year">1969</span><span class="t-label">Born</span></div>
+          <div class="t-item"><span class="t-year">~1980</span><span class="t-label">First drums</span></div>
+          <div class="t-item"><span class="t-year">~1992</span><span class="t-label">Semi-pro stages</span></div>
+          <div class="t-item"><span class="t-year">Runic</span><span class="t-label">First band</span></div>
+          <div class="t-item"><span class="t-year">The Bar Is Open</span><span class="t-label">Next band</span></div>
+          <div class="t-item"><span class="t-year">Transbordeur · Glob</span><span class="t-label">Major venues</span></div>
+          <div class="t-item"><span class="t-year">2019</span><span class="t-label">Joins Les Krakens</span></div>
+          <div class="t-item"><span class="t-year">Sept. 2025</span><span class="t-label">Ned joins</span></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>Les Krakens &nbsp;·&nbsp; Lyon</footer>
+
+  <script>
+    function setLang(lang) {
+      document.querySelectorAll('[data-lang]').forEach(el => {
+        el.classList.toggle('visible', el.dataset.lang === lang);
+      });
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.textContent.toLowerCase() === lang);
+      });
+      document.documentElement.lang = lang;
+    }
+  </script>
+</body>
+</html>

@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+
+!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
@@ -167,6 +168,7 @@
 <nav class="nav-tabs">
   <div class="nav-tab active" onclick="showSection('videos',this)">Vidéos</div>
   <div class="nav-tab" onclick="showSection('music',this)">Musique</div>
+  <div class="nav-tab" onclick="showSection('bio',this)">Biographies</div>
   <div class="nav-tab" onclick="showSection('about',this)">À propos</div>
 </nav>
 
@@ -226,6 +228,74 @@
     <button class="add-slot-btn" id="add-audio-btn" onclick="openAddTrackForm()">
       <i class="ti ti-music-plus" aria-hidden="true"></i> Ajouter un titre
     </button>
+  </section>
+
+  <!-- ═══ BIO ═══ -->
+  <section id="sec-bio" class="section">
+    <div class="section-title">Biographies</div>
+    <div style="display:flex; flex-direction:column; gap:14px; max-width:680px;">
+
+      <!-- Groupe -->
+      <a href="krakens.html" style="text-decoration:none;">
+        <div style="background:var(--bg-mid); border:1px solid var(--border); border-radius:4px; padding:20px 24px; display:flex; align-items:center; gap:20px; transition:border-color 0.2s; cursor:pointer;" onmouseover="this.style.borderColor='var(--green-mid)'" onmouseout="this.style.borderColor='var(--border)'">
+          <div style="width:52px;height:52px;border-radius:50%;background:#1a2a14;border:2px solid var(--green-mid);display:flex;align-items:center;justify-content:center;font-family:'Black Han Sans',sans-serif;font-size:16px;color:var(--green-bright);flex-shrink:0;">TK</div>
+          <div style="flex:1;">
+            <div style="font-family:'Black Han Sans',sans-serif;font-size:17px;color:var(--green-bright);letter-spacing:2px;">LES KRAKENS</div>
+            <div style="font-size:12px;color:var(--text-muted);margin-top:4px;letter-spacing:1px;text-transform:uppercase;">Histoire du groupe · Depuis 2019</div>
+          </div>
+          <div style="font-size:12px;color:var(--green-mid);letter-spacing:1px;text-transform:uppercase;">Lire →</div>
+        </div>
+      </a>
+
+      <!-- Glyn -->
+      <a href="glyn.html" style="text-decoration:none;">
+        <div style="background:var(--bg-mid); border:1px solid var(--border); border-radius:4px; padding:20px 24px; display:flex; align-items:center; gap:20px; transition:border-color 0.2s; cursor:pointer;" onmouseover="this.style.borderColor='var(--green-mid)'" onmouseout="this.style.borderColor='var(--border)'">
+          <div style="width:52px;height:52px;border-radius:50%;background:#1a2a14;border:2px solid var(--green-mid);display:flex;align-items:center;justify-content:center;font-family:'Black Han Sans',sans-serif;font-size:18px;color:var(--green-bright);flex-shrink:0;">G</div>
+          <div style="flex:1;">
+            <div style="font-family:'Black Han Sans',sans-serif;font-size:17px;color:var(--green-bright);letter-spacing:2px;">GLYN</div>
+            <div style="font-size:12px;color:var(--text-muted);margin-top:4px;letter-spacing:1px;text-transform:uppercase;">Chant · Fondateur</div>
+          </div>
+          <div style="font-size:12px;color:var(--green-mid);letter-spacing:1px;text-transform:uppercase;">Lire →</div>
+        </div>
+      </a>
+
+      <!-- Phil -->
+      <a href="phil.html" style="text-decoration:none;">
+        <div style="background:var(--bg-mid); border:1px solid var(--border); border-radius:4px; padding:20px 24px; display:flex; align-items:center; gap:20px; transition:border-color 0.2s; cursor:pointer;" onmouseover="this.style.borderColor='var(--green-mid)'" onmouseout="this.style.borderColor='var(--border)'">
+          <div style="width:52px;height:52px;border-radius:50%;background:#1a2a14;border:2px solid var(--green-mid);display:flex;align-items:center;justify-content:center;font-family:'Black Han Sans',sans-serif;font-size:18px;color:var(--green-bright);flex-shrink:0;">P</div>
+          <div style="flex:1;">
+            <div style="font-family:'Black Han Sans',sans-serif;font-size:17px;color:var(--green-bright);letter-spacing:2px;">PHIL</div>
+            <div style="font-size:12px;color:var(--text-muted);margin-top:4px;letter-spacing:1px;text-transform:uppercase;">Guitare Solo · Compositeur</div>
+          </div>
+          <div style="font-size:12px;color:var(--green-mid);letter-spacing:1px;text-transform:uppercase;">Lire →</div>
+        </div>
+      </a>
+
+      <!-- Bob -->
+      <a href="bob.html" style="text-decoration:none;">
+        <div style="background:var(--bg-mid); border:1px solid var(--border); border-radius:4px; padding:20px 24px; display:flex; align-items:center; gap:20px; transition:border-color 0.2s; cursor:pointer;" onmouseover="this.style.borderColor='var(--green-mid)'" onmouseout="this.style.borderColor='var(--border)'">
+          <div style="width:52px;height:52px;border-radius:50%;background:#1a2a14;border:2px solid var(--green-mid);display:flex;align-items:center;justify-content:center;font-family:'Black Han Sans',sans-serif;font-size:18px;color:var(--green-bright);flex-shrink:0;">B</div>
+          <div style="flex:1;">
+            <div style="font-family:'Black Han Sans',sans-serif;font-size:17px;color:var(--green-bright);letter-spacing:2px;">BOB</div>
+            <div style="font-size:12px;color:var(--text-muted);margin-top:4px;letter-spacing:1px;text-transform:uppercase;">Batterie</div>
+          </div>
+          <div style="font-size:12px;color:var(--green-mid);letter-spacing:1px;text-transform:uppercase;">Lire →</div>
+        </div>
+      </a>
+
+      <!-- Ned -->
+      <a href="ned.html" style="text-decoration:none;">
+        <div style="background:var(--bg-mid); border:1px solid var(--border); border-radius:4px; padding:20px 24px; display:flex; align-items:center; gap:20px; transition:border-color 0.2s; cursor:pointer;" onmouseover="this.style.borderColor='var(--green-mid)'" onmouseout="this.style.borderColor='var(--border)'">
+          <div style="width:52px;height:52px;border-radius:50%;background:#1a2a14;border:2px solid var(--green-mid);display:flex;align-items:center;justify-content:center;font-family:'Black Han Sans',sans-serif;font-size:18px;color:var(--green-bright);flex-shrink:0;">N</div>
+          <div style="flex:1;">
+            <div style="font-family:'Black Han Sans',sans-serif;font-size:17px;color:var(--green-bright);letter-spacing:2px;">NED</div>
+            <div style="font-size:12px;color:var(--text-muted);margin-top:4px;letter-spacing:1px;text-transform:uppercase;">Basse</div>
+          </div>
+          <div style="font-size:12px;color:var(--green-mid);letter-spacing:1px;text-transform:uppercase;">Lire →</div>
+        </div>
+      </a>
+
+    </div>
   </section>
 
   <!-- ═══ ABOUT ═══ -->
