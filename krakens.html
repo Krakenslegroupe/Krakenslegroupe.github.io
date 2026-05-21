@@ -20,20 +20,45 @@
     .nav-back { position: absolute; top: 24px; left: 32px; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: #555; text-decoration: none; transition: color 0.2s; }
     .nav-back:hover { color: #b41e1e; }
     main { max-width: 780px; margin: 0 auto; padding: 70px 40px 100px; }
+    /* Group photo */
+    .group-photo-wrap { display: flex; justify-content: center; margin-bottom: 50px; }
+    .group-photo { width: 100%; max-width: 700px; height: 420px; object-fit: cover; object-position: center; border-radius: 4px; border: 1px solid #2a2a2a; }
     .bio-text { font-size: 20px; font-weight: 300; line-height: 1.9; color: #cec8bf; }
     .bio-text p + p { margin-top: 1.8em; }
     .bio-text em { font-style: italic; font-family: 'Playfair Display', serif; font-size: 21px; color: #e8e2d9; }
     .section-divider { display: flex; align-items: center; gap: 16px; margin: 3rem 0 2rem; }
     .section-divider span { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #b41e1e; white-space: nowrap; }
     .section-divider::before, .section-divider::after { content: ''; flex: 1; height: 1px; background: #2a2a2a; }
-    /* Lineup cards with links */
+    /* MP3 Player */
+    .player-section { margin-top: 60px; padding-top: 40px; border-top: 1px solid #222; }
+    .player-title { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #555; margin-bottom: 24px; }
+    .track-list { display: flex; flex-direction: column; gap: 8px; }
+    .track { display: flex; align-items: center; gap: 16px; background: #161616; border: 1px solid #222; border-radius: 4px; padding: 12px 16px; cursor: pointer; transition: border-color 0.2s; }
+    .track:hover, .track.active { border-color: #b41e1e; }
+    .track-num { font-family: 'Playfair Display', serif; font-size: 13px; color: #444; width: 20px; flex-shrink: 0; }
+    .track.active .track-num { color: #b41e1e; }
+    .track-name { font-size: 16px; font-weight: 300; color: #cec8bf; flex: 1; }
+    .track.active .track-name { color: #f0ebe3; }
+    .track-play { font-size: 12px; color: #444; }
+    .track.active .track-play { color: #b41e1e; }
+    .audio-bar { margin-top: 16px; background: #161616; border: 1px solid #222; border-radius: 4px; padding: 16px; }
+    .now-playing { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: #b41e1e; margin-bottom: 10px; }
+    audio { width: 100%; height: 36px; filter: invert(1) hue-rotate(180deg) brightness(0.8); }
+    /* Lineup */
     .lineup { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 2rem; }
-    .lineup-item { background: #161616; border: 1px solid #2a2a2a; border-radius: 4px; padding: 10px 18px; text-decoration: none; transition: border-color 0.2s, background 0.2s; cursor: pointer; }
-    .lineup-item:hover { border-color: #b41e1e; background: #1a1010; }
+    .lineup-item { background: #161616; border: 1px solid #2a2a2a; border-radius: 4px; padding: 10px 18px; text-decoration: none; transition: border-color 0.2s; }
+    .lineup-item:hover { border-color: #b41e1e; }
     .lineup-name { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; color: #f0ebe3; }
     .lineup-role { font-size: 13px; font-weight: 300; color: #b41e1e; letter-spacing: 1px; text-transform: uppercase; margin-top: 2px; }
     .lineup-link { font-size: 11px; color: #444; letter-spacing: 1px; text-transform: uppercase; margin-top: 4px; }
     .lineup-item:hover .lineup-link { color: #b41e1e; }
+    /* Videos */
+    .video-section { margin-top: 60px; padding-top: 40px; border-top: 1px solid #222; }
+    .video-grid { display: flex; flex-direction: column; gap: 24px; margin-top: 16px; }
+    .video-wrap { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 4px; border: 1px solid #2a2a2a; }
+    .video-wrap iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+    .video-label { font-size: 13px; color: #666; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
+    /* Timeline */
     .timeline { margin-top: 60px; padding-top: 40px; border-top: 1px solid #222; }
     .timeline-title { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #555; margin-bottom: 24px; }
     .timeline-grid { display: flex; flex-wrap: wrap; gap: 10px; }
@@ -59,15 +84,20 @@
   </header>
 
   <main>
+    <!-- Photo de groupe -->
+    <div class="group-photo-wrap">
+      <img class="group-photo" src="images/krakens.jpg" alt="Les Krakens en concert" />
+    </div>
+
     <!-- FRANÇAIS -->
     <div data-lang="fr" class="visible">
       <div class="bio-text">
-        <p>Fondés à Lyon en janvier 2019 par le chanteur <em>Glyn</em>, les Krakens naissent d'une conviction simple : le rock n'est pas mort, il attend juste d'être réveillé. Groupe de reprises à ses débuts, la formation explore dès l'origine un répertoire large — des classiques du hard rock et du metal des années 80-90 (<em>Metallica, AC/DC, Iron Maiden, Van Halen, Alice Cooper</em>) jusqu'aux titres plus accessibles de <em>Cranberries, Gary Moore, Tina Turner</em> ou <em>Radiohead</em>. Leur marque de fabrique ? S'emparer de morceaux pop-rock de l'époque — <em>Simple Minds, Midnight Oil, Dire Straits</em> — et les "métalliser" sans les trahir. Une exécution au sens propre du terme.</p>
-        <p>En 2021, un tournant décisif : les deux guitaristes fondateurs quittent le navire. C'est l'arrivée de <em>Phil</em>, compositeur et soliste aguerri, qui change tout. Avec lui, les Krakens cessent d'être un groupe de reprises pour devenir un groupe de création. Le son se fait plus lourd, plus affirmé, résolument metal. Le batteur <em>Bob</em>, pilier de la formation depuis les débuts, ancre le tout dans une rythmique implacable. En 2024, les Krakens franchissent une étape majeure avec la sortie de leur <em>premier CD de compositions originales</em>.</p>
+        <p>Fondés à Lyon en janvier 2019 par le chanteur <em>Glyn</em>, les Krakens naissent d'une conviction simple : le rock n'est pas mort, il attend juste d'être réveillé. Groupe de reprises à ses débuts, la formation explore dès l'origine un répertoire large — des classiques du hard rock et du metal des années 80-90 (<em>Metallica, AC/DC, Iron Maiden, Van Halen, Alice Cooper</em>) jusqu'aux titres plus accessibles de <em>Cranberries, Gary Moore, Tina Turner</em> ou <em>Radiohead</em>. Leur marque de fabrique ? S'emparer de morceaux pop-rock de l'époque — <em>Simple Minds, Midnight Oil, Dire Straits</em> — et les "métalliser" sans les trahir.</p>
+        <p>Le batteur <em>Bob</em>, pilier de la formation depuis les débuts, ancre le tout dans une rythmique implacable. En février 2022, l'arrivée de <em>Phil</em>, compositeur et soliste aguerri, marque le tournant décisif : les Krakens cessent d'être un groupe de reprises pour devenir un groupe de création. Le son se fait plus lourd, plus affirmé, résolument metal. En 2024, les Krakens franchissent une étape majeure avec la sortie de leur <em>premier CD de compositions originales</em>.</p>
         <div class="section-divider"><span>L'arrivée de Ned</span></div>
-        <p>En septembre 2025, les Krakens vivent une nouvelle transformation — et pas des moindres. Le départ du guitariste rythmique et du bassiste ouvre la porte à <em>Ned</em>, bassiste croate au parcours international exceptionnel. Forgé dans les scènes hardcore et death metal européennes, riche d'enregistrements en studio sur plusieurs pays, Ned apporte aux Krakens un niveau technique et une puissance de jeu metal rarement atteints. Sa basse — une <em>Spector NS II 5</em> à cinq cordes propulsée par un stack <em>Ampeg</em> et taillée par un <em>Darkglass B7K</em> — insuffle au groupe une profondeur et une agressivité nouvelles qui font franchir au son un cap décisif.</p>
-        <p>Dans cette formation resserrée et plus soudée que jamais, les Krakens atteignent leur pleine maturité. Forts de <em>17 morceaux originaux</em>, ils entrent en studio en <em>mai 2026</em> pour enregistrer un nouvel EP — la suite logique d'un groupe qui n'a jamais cessé de grandir.</p>
+        <p>En septembre 2025, <em>Ned</em>, bassiste croate au parcours international exceptionnel, rejoint les Krakens. Forgé dans les scènes hardcore et death metal européennes, il apporte une puissance de jeu metal rarement atteinte. Sa basse — une <em>Spector NS II 5</em> propulsée par un stack <em>Ampeg</em> et un <em>Darkglass B7K</em> — insuffle au groupe une profondeur nouvelle. Forts de <em>17 morceaux originaux</em>, ils entrent en studio en <em>mai 2026</em> pour enregistrer un nouvel EP.</p>
       </div>
+
       <div class="section-divider"><span>Formation actuelle</span></div>
       <div class="lineup">
         <a class="lineup-item" href="glyn.html"><div class="lineup-name">Glyn</div><div class="lineup-role">Chant</div><div class="lineup-link">Biographie →</div></a>
@@ -75,13 +105,13 @@
         <a class="lineup-item" href="bob.html"><div class="lineup-name">Bob</div><div class="lineup-role">Batterie</div><div class="lineup-link">Biographie →</div></a>
         <a class="lineup-item" href="ned.html"><div class="lineup-name">Ned</div><div class="lineup-role">Basse</div><div class="lineup-link">Biographie →</div></a>
       </div>
+
       <div class="timeline">
         <p class="timeline-title">Repères</p>
         <div class="timeline-grid">
           <div class="t-item"><span class="t-year">Jan. 2019</span><span class="t-label">Fondation par Glyn</span></div>
           <div class="t-item"><span class="t-year">2019</span><span class="t-label">Bob rejoint</span></div>
-          <div class="t-item"><span class="t-year">2021</span><span class="t-label">Tournant metal</span></div>
-          <div class="t-item"><span class="t-year">Fév. 2022</span><span class="t-label">Phil rejoint</span></div>
+          <div class="t-item"><span class="t-year">Fév. 2022</span><span class="t-label">Phil rejoint · Tournant metal</span></div>
           <div class="t-item"><span class="t-year">2024</span><span class="t-label">1er CD original</span></div>
           <div class="t-item"><span class="t-year">Sept. 2025</span><span class="t-label">Ned rejoint</span></div>
           <div class="t-item"><span class="t-year">Mai 2026</span><span class="t-label">Nouvel EP en studio</span></div>
@@ -92,12 +122,12 @@
     <!-- ENGLISH -->
     <div data-lang="en">
       <div class="bio-text">
-        <p>Founded in Lyon in January 2019 by vocalist <em>Glyn</em>, Les Krakens were born from a simple conviction: rock isn't dead — it just needs waking up. Starting out as a cover band, the group quickly established a wide-ranging repertoire, from hard rock and metal classics of the 80s and 90s (<em>Metallica, AC/DC, Iron Maiden, Van Halen, Alice Cooper</em>) to more accessible tracks by <em>The Cranberries, Gary Moore, Tina Turner</em> and <em>Radiohead</em>. Their signature move? Taking pop-rock tracks of the era — <em>Simple Minds, Midnight Oil, Dire Straits</em> — and "metalizing" them without betraying their spirit. Executed, in every sense of the word.</p>
-        <p>In 2021, a pivotal moment: the two founding guitarists departed. The arrival of <em>Phil</em>, seasoned composer and lead guitarist, changed everything. Under his influence, Les Krakens shifted from cover band to creative force. The sound grew heavier, more assertive, unmistakably metal. Drummer <em>Bob</em>, a cornerstone of the lineup since day one, kept it all locked in with relentless precision. In 2024, the band reached a milestone with the release of their <em>first original CD</em>.</p>
+        <p>Founded in Lyon in January 2019 by vocalist <em>Glyn</em>, Les Krakens were born from a simple conviction: rock isn't dead — it just needs waking up. Starting as a cover band, they quickly built a wide-ranging repertoire from 80s-90s hard rock and metal classics (<em>Metallica, AC/DC, Iron Maiden, Van Halen, Alice Cooper</em>) to more accessible tracks. Their signature move? Taking pop-rock songs and "metalizing" them without betraying their spirit.</p>
+        <p>Drummer <em>Bob</em>, a cornerstone since day one, kept it all locked in with relentless precision. In February 2022, the arrival of <em>Phil</em>, seasoned composer and lead guitarist, marked the decisive turning point: Les Krakens shifted from cover band to creative force. The sound grew heavier and unmistakably metal. In 2024, the band released their <em>first original CD</em>.</p>
         <div class="section-divider"><span>Ned joins the ranks</span></div>
-        <p>In September 2025, Les Krakens underwent another transformation — and a significant one. The departure of the rhythm guitarist and bassist opened the door to <em>Ned</em>, a Croatian bassist with an exceptional international background. Forged in European hardcore and melodic death metal scenes, with studio recordings across multiple countries under his belt, Ned brings the band a level of technical mastery and metal playing power rarely found at this level. His <em>five-string Spector NS II</em>, driven through an <em>Ampeg</em> stack and carved by a <em>Darkglass B7K</em>, injects the band with a new depth and ferocity that pushes the sound into decisive new territory.</p>
-        <p>In this tighter, more focused lineup, Les Krakens have reached full maturity. Armed with <em>17 original tracks</em>, they entered the studio in <em>May 2026</em> to record a new EP — the natural next step for a band that has never stopped growing.</p>
+        <p>In September 2025, <em>Ned</em>, a Croatian bassist with an exceptional international background, joined Les Krakens. Forged in European hardcore and death metal scenes, his <em>five-string Spector NS II</em>, driven through an <em>Ampeg</em> stack and a <em>Darkglass B7K</em>, injects the band with new depth and ferocity. Armed with <em>17 original tracks</em>, they entered the studio in <em>May 2026</em> to record a new EP.</p>
       </div>
+
       <div class="section-divider"><span>Current lineup</span></div>
       <div class="lineup">
         <a class="lineup-item" href="glyn.html"><div class="lineup-name">Glyn</div><div class="lineup-role">Vocals</div><div class="lineup-link">Biography →</div></a>
@@ -105,27 +135,115 @@
         <a class="lineup-item" href="bob.html"><div class="lineup-name">Bob</div><div class="lineup-role">Drums</div><div class="lineup-link">Biography →</div></a>
         <a class="lineup-item" href="ned.html"><div class="lineup-name">Ned</div><div class="lineup-role">Bass</div><div class="lineup-link">Biography →</div></a>
       </div>
+
       <div class="timeline">
         <p class="timeline-title">Timeline</p>
         <div class="timeline-grid">
           <div class="t-item"><span class="t-year">Jan. 2019</span><span class="t-label">Founded by Glyn</span></div>
           <div class="t-item"><span class="t-year">2019</span><span class="t-label">Bob joins</span></div>
-          <div class="t-item"><span class="t-year">2021</span><span class="t-label">Metal turning point</span></div>
-          <div class="t-item"><span class="t-year">Feb. 2022</span><span class="t-label">Phil joins</span></div>
+          <div class="t-item"><span class="t-year">Feb. 2022</span><span class="t-label">Phil joins · Metal turning point</span></div>
           <div class="t-item"><span class="t-year">2024</span><span class="t-label">First original CD</span></div>
           <div class="t-item"><span class="t-year">Sept. 2025</span><span class="t-label">Ned joins</span></div>
           <div class="t-item"><span class="t-year">May 2026</span><span class="t-label">New EP in studio</span></div>
         </div>
       </div>
     </div>
+
+    <!-- LECTEUR MP3 -->
+    <div class="player-section">
+      <p class="player-title">🎵 Écouter / Listen</p>
+      <div class="audio-bar">
+        <div class="now-playing" id="now-playing">Sélectionne un titre ↓</div>
+        <audio id="player" controls></audio>
+      </div>
+      <div class="track-list" style="margin-top:12px;">
+        <div class="track" onclick="playTrack(this, 'audio/Kraken.mp3', 'Kraken')">
+          <span class="track-num">01</span>
+          <span class="track-name">Kraken</span>
+          <span class="track-play">▶</span>
+        </div>
+        <div class="track" onclick="playTrack(this, 'audio/Decadence.mp3', 'Decadence')">
+          <span class="track-num">02</span>
+          <span class="track-name">Decadence</span>
+          <span class="track-play">▶</span>
+        </div>
+        <div class="track" onclick="playTrack(this, 'audio/Song_Of_Resilience.mp3', 'Song Of Resilience')">
+          <span class="track-num">03</span>
+          <span class="track-name">Song Of Resilience</span>
+          <span class="track-play">▶</span>
+        </div>
+        <div class="track" onclick="playTrack(this, 'audio/Hotel_Gate.mp3', 'Hotel Gate')">
+          <span class="track-num">04</span>
+          <span class="track-name">Hotel Gate</span>
+          <span class="track-play">▶</span>
+        </div>
+        <div class="track" onclick="playTrack(this, 'audio/Pray_the_lord.mp3', 'Pray The Lord')">
+          <span class="track-num">05</span>
+          <span class="track-name">Pray The Lord</span>
+          <span class="track-play">▶</span>
+        </div>
+        <div class="track" onclick="playTrack(this, 'audio/Samurai.mp3', 'Samurai')">
+          <span class="track-num">06</span>
+          <span class="track-name">Samurai</span>
+          <span class="track-play">▶</span>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- VIDÉOS -->
+    <div class="video-section">
+      <p class="player-title">🎬 Vidéos / Videos</p>
+      <div class="video-grid">
+
+        <div>
+          <p class="video-label">Live · Concert</p>
+          <div class="video-wrap">
+            <iframe src="https://www.youtube.com/embed/sx8LkTgw6jU" allowfullscreen loading="lazy"></iframe>
+          </div>
+        </div>
+
+        <div>
+          <p class="video-label">Live · Concert</p>
+          <div class="video-wrap">
+            <iframe src="https://www.youtube.com/embed/XXgNeMyLStM" allowfullscreen loading="lazy"></iframe>
+          </div>
+        </div>
+
+        <div>
+          <p class="video-label">Live · Concert</p>
+          <div class="video-wrap">
+            <iframe src="https://www.youtube.com/embed/6pN9mVmwdv4?start=30" allowfullscreen loading="lazy"></iframe>
+          </div>
+        </div>
+
+        <div>
+          <p class="video-label">Live · Concert</p>
+          <div class="video-wrap">
+            <iframe src="https://www.youtube.com/embed/ZoOHlq0VGsk" allowfullscreen loading="lazy"></iframe>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
   </main>
 
   <footer>Les Krakens &nbsp;·&nbsp; Lyon &nbsp;·&nbsp; 2019–2026</footer>
+
   <script>
     function setLang(lang) {
       document.querySelectorAll('[data-lang]').forEach(el => el.classList.toggle('visible', el.dataset.lang === lang));
       document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.toggle('active', btn.textContent.toLowerCase() === lang));
       document.documentElement.lang = lang;
+    }
+    function playTrack(el, src, name) {
+      document.querySelectorAll('.track').forEach(t => t.classList.remove('active'));
+      el.classList.add('active');
+      const player = document.getElementById('player');
+      player.src = src;
+      player.play();
+      document.getElementById('now-playing').textContent = '♪ ' + name;
     }
   </script>
 </body>
