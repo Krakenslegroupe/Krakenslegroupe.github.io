@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Krakens — Chaîne Officielle</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg-deep: #0a0a0f;
+      --bg-mid: #111118;
+      --bg-card: #16161f;
+      --border: #1e1e2e;
+      --border-hover: #2e2e4e;
+      --green-bright: #c9f0a0;
+      --green-mid: #5ac83c;
+      --text-primary: #e8e4dc;
+      --text-secondary: #8a8a9a;
+      --text-muted: #4a4a5a;
+      --text-very-muted: #3a3a5a;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg-deep); color: var(--text-primary); font-family: 'Barlow', sans-serif; min-height: 100vh; }
+
+    /* BANNER */
+    .banner { position: relative; height: 420px; background: #0a0a0f; overflow: hidden; display: flex; align-items: flex-end; padding: 0 32px 30px; }
+    .banner-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 20%; opacity: 0.55; }
+    .banner-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(10,10,15,0.85) 100%); z-index: 1; }
+    .banner-svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2; opacity: 0.4; }
+    .banner-text { position: relative; z-index: 3; }
+    .band-name { font-family: 'Black Han Sans', sans-serif; font-size: 56px; letter-spacing: 6px; color: var(--green-bright); text-shadow: 0 0 40px rgba(90,200,60,0.35); line-height: 1; }
+    .band-sub { font-size: 13px; color: #6a7a60; font-weight: 300; letter-spacing: 4px; text-transform: uppercase; margin-top: 6px; }
+
+    /* HEADER */
+    .channel-header { background: var(--bg-mid); border-bottom: 1px solid var(--border); padding: 18px 32px; display: flex; align-items: center; gap: 18px; position: sticky; top: 0; z-index: 100; }
+    .avatar { width: 68px; height: 68px; border-radius: 50%; background: #1a2a14; border: 2px solid var(--green-mid); display: flex; align-items: center; justify-content: center; font-family: 'Black Han Sans', sans-serif; font-size: 22px; color: var(--green-bright); flex-shrink: 0; }
+    .channel-info { flex: 1; }
+    .channel-name { font-family: 'Black Han Sans', sans-serif; font-size: 20px; color: var(--green-bright); letter-spacing: 2px; }
+    .channel-stats { font-size: 12px; color: var(--text-muted); margin-top: 4px; letter-spacing: 1px; }
+    .sub-btn { background: var(--green-bright); color: var(--bg-deep); border: none; padding: 10px 22px; font-family: 'Barlow', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 1.5px; cursor: pointer; border-radius: 2px; text-transform: uppercase; transition: background 0.2s; }
+    .sub-btn:hover { background: #dfffb8; }
+
+    /* NAV */
+    .nav-tabs { background: var(--bg-mid); border-bottom: 1px solid var(--border); display: flex; padding: 0 32px; }
+    .nav-tab { padding: 14px 18px; font-size: 12px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); cursor: pointer; border-bottom: 2px solid transparent; transition: color 0.2s, border-color 0.2s; user-select: none; }
+    .nav-tab.active { color: var(--green-bright); border-bottom-color: var(--green-mid); }
+    .nav-tab:hover:not(.active) { color: var(--text-secondary); }
+
+    /* CONTENT */
+    .content { padding: 28px 32px; max-width: 1200px; }
+    .section { display: none; }
+    .section.active { display: block; }
+    .section-title { font-family: 'Black Han Sans', sans-serif; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; color: var(--green-mid); margin-bottom: 18px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+
+    /* VIDEO GRID */
+    .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; margin-bottom: 20px; }
+    .video-card { cursor: pointer; }
+    .video-thumb { position: relative; aspect-ratio: 16/9; background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+    .video-thumb iframe { width: 100%; height: 100%; border: none; display: block; }
+    .video-thumb-placeholder { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; background: var(--bg-card); border: 2px dashed var(--border-hover); color: var(--text-very-muted); font-size: 12px; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: border-color 0.2s, color 0.2s, background 0.2s; }
+    .video-thumb-placeholder:hover { border-color: var(--green-mid); color: #7aaa60; background: rgba(90,200,60,0.04); }
+    .video-thumb-placeholder i { font-size: 30px; }
+    .yt-thumbnail { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .yt-play-overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0); transition: background 0.2s; }
+    .video-card:hover .yt-play-overlay { background: rgba(0,0,0,0.45); }
+    .yt-play-circle { width: 54px; height: 54px; background: rgba(0,0,0,0.8); border: 2px solid var(--green-mid); border-radius: 50%; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.2s; }
+    .video-card:hover .yt-play-circle { opacity: 1; }
+    .video-meta { padding: 10px 0 0; }
+    .video-title { font-size: 13px; font-weight: 500; color: var(--text-secondary); line-height: 1.4; margin-bottom: 4px; }
+    .video-views { font-size: 11px; color: var(--text-muted); letter-spacing: 0.5px; }
+
+    /* ADD VIDEO FORM */
+    .add-video-form { background: var(--bg-mid); border: 1px dashed var(--border-hover); border-radius: 4px; padding: 18px 20px; margin-bottom: 12px; display: none; }
+    .add-video-form.open { display: block; }
+    .form-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; display: block; }
+    .form-input { width: 100%; background: var(--bg-card); border: 1px solid var(--border-hover); border-radius: 3px; padding: 10px 14px; color: var(--text-primary); font-family: 'Barlow', sans-serif; font-size: 14px; outline: none; transition: border-color 0.2s; margin-bottom: 12px; }
+    .form-input:focus { border-color: var(--green-mid); }
+    .form-input::placeholder { color: var(--text-very-muted); }
+    .form-row { display: flex; gap: 10px; }
+    .btn-green { background: var(--green-mid); color: #0a0a0f; border: none; padding: 9px 18px; font-family: 'Barlow', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; border-radius: 2px; transition: background 0.2s; }
+    .btn-green:hover { background: var(--green-bright); }
+    .btn-ghost { background: transparent; color: var(--text-muted); border: 1px solid var(--border-hover); padding: 9px 18px; font-family: 'Barlow', sans-serif; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; border-radius: 2px; transition: border-color 0.2s, color 0.2s; }
+    .btn-ghost:hover { border-color: var(--text-secondary); color: var(--text-secondary); }
+    .add-slot-btn { display: flex; align-items: center; gap: 10px; background: transparent; border: 1px dashed var(--border-hover); border-radius: 3px; padding: 12px 18px; color: var(--text-very-muted); font-size: 12px; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: border-color 0.2s, color 0.2s; font-family: 'Barlow', sans-serif; }
+    .add-slot-btn:hover { border-color: var(--green-mid); color: #7aaa60; }
+
+    /* MODAL YT */
+    .modal-bg { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.94); z-index: 200; align-items: center; justify-content: center; }
+    .modal-bg.open { display: flex; }
+    .modal-inner { position: relative; width: 90vw; max-width: 960px; }
+    .modal-inner iframe { width: 100%; aspect-ratio: 16/9; border: none; border-radius: 4px; }
+    .modal-close { position: absolute; top: -44px; right: 0; background: transparent; border: 1px solid var(--border-hover); color: var(--text-secondary); font-size: 18px; width: 34px; height: 34px; border-radius: 2px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: border-color 0.2s, color 0.2s; }
+    .modal-close:hover { border-color: var(--green-mid); color: var(--green-bright); }
+
+    /* AUDIO */
+    .audio-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 18px; }
+    .audio-track { background: var(--bg-mid); border: 1px solid var(--border); border-radius: 3px; padding: 14px 18px; transition: border-color 0.2s; }
+    .audio-track.has-audio { border-color: var(--border-hover); }
+    .audio-top { display: flex; align-items: center; gap: 14px; }
+    .track-num { font-family: 'Black Han Sans', sans-serif; font-size: 20px; color: var(--border-hover); min-width: 30px; text-align: center; }
+    .audio-track.playing .track-num { color: var(--green-mid); }
+    .track-play-btn { width: 38px; height: 38px; background: var(--bg-card); border: 1px solid var(--border-hover); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; transition: border-color 0.2s, background 0.2s; }
+    .track-play-btn:hover, .audio-track.playing .track-play-btn { border-color: var(--green-mid); background: rgba(90,200,60,0.1); }
+    .track-info { flex: 1; min-width: 0; }
+    .track-name { font-size: 14px; font-weight: 500; color: var(--text-secondary); }
+    .audio-track.playing .track-name { color: var(--green-bright); }
+    .track-sub { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+    .track-progress { margin-top: 10px; padding-left: 44px; }
+    .progress-bar-bg { height: 3px; background: var(--border); border-radius: 2px; overflow: hidden; margin-bottom: 4px; cursor: pointer; }
+    .progress-bar-fill { height: 100%; background: var(--green-mid); border-radius: 2px; width: 0%; transition: width 0.4s linear; }
+    .track-time { font-size: 10px; color: var(--text-muted); text-align: right; }
+
+    /* Audio add form */
+    .audio-add-form { background: var(--bg-mid); border: 1px dashed var(--border-hover); border-radius: 4px; padding: 18px 20px; margin-bottom: 12px; display: none; }
+    .audio-add-form.open { display: block; }
+
+    /* ABOUT */
+    .about-card { background: var(--bg-mid); border: 1px solid var(--border); border-radius: 3px; padding: 24px; max-width: 680px; }
+    .about-text { font-size: 15px; color: var(--text-secondary); line-height: 1.85; font-weight: 300; outline: none; min-height: 80px; }
+    .about-hint { font-size: 11px; color: var(--text-muted); margin-top: 10px; letter-spacing: 1px; text-transform: uppercase; }
+    .about-links { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
+    .about-link { font-size: 12px; color: var(--green-mid); letter-spacing: 1px; text-transform: uppercase; border: 1px solid #1e3e1e; padding: 7px 14px; border-radius: 2px; cursor: pointer; transition: background 0.2s, border-color 0.2s; text-decoration: none; }
+    .about-link:hover { background: rgba(90,200,60,0.1); border-color: var(--green-mid); }
+
+    /* HINT BOX */
+    .hint-box { background: rgba(90,200,60,0.05); border: 1px solid rgba(90,200,60,0.2); border-radius: 3px; padding: 12px 16px; margin-bottom: 20px; font-size: 12px; color: #7aaa60; line-height: 1.7; letter-spacing: 0.3px; }
+    .hint-box strong { color: var(--green-bright); font-weight: 600; }
+  </style>
+</head>
+<body>
+
+<!-- BANNER -->
+<div class="banner">
+  <img class="banner-img" src="images/hero.jpg" alt="Les Krakens" />
+  <div class="banner-overlay"></div>
+  <svg class="banner-svg" viewBox="0 0 1200 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <radialGradient id="gc" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#5ac83c" stop-opacity="0.2"/>
+        <stop offset="100%" stop-color="#5ac83c" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+    <ellipse cx="900" cy="110" rx="300" ry="180" fill="url(#gc)"/>
+    <path d="M0,180 Q150,60 350,150 Q500,220 650,80 Q780,-20 950,110 Q1060,180 1200,80" stroke="#5ac83c" stroke-width="2.5" fill="none" opacity="0.25"/>
+    <path d="M0,200 Q100,100 280,170 Q440,240 600,100 Q740,0 900,130 Q1020,210 1200,120" stroke="#3a8c2a" stroke-width="1.5" fill="none" opacity="0.2"/>
+    <path d="M200,220 Q350,90 520,180 Q680,260 820,100 Q950,0 1100,150" stroke="#1a5c1a" stroke-width="3" fill="none" opacity="0.3"/>
+    <circle cx="350" cy="150" r="5" fill="#5ac83c" opacity="0.5"/>
+    <circle cx="650" cy="80" r="4" fill="#5ac83c" opacity="0.4"/>
+    <circle cx="950" cy="110" r="7" fill="#5ac83c" opacity="0.35"/>
+  </svg>
+  <div class="banner-text">
+    <div class="band-name">THE KRAKENS</div>
+    <div class="band-sub">Metal · Profondeurs inconnues</div>
+  </div>
+</div>
+
+<!-- CHANNEL HEADER -->
+<div class="channel-header">
+  <div class="avatar">TK</div>
+  <div class="channel-info">
+    <div class="channel-name">THE KRAKENS</div>
+    <div class="channel-stats" id="stats-line">@thekrakens · 0 vidéo · 0 titre</div>
+  </div>
+  <button class="sub-btn" onclick="toggleSub(this)">S'abonner</button>
+</div>
+
+<!-- NAV -->
+<nav class="nav-tabs">
+  <div class="nav-tab active" onclick="showSection('videos',this)">Vidéos</div>
+  <div class="nav-tab" onclick="showSection('music',this)">Musique</div>
+  <div class="nav-tab" onclick="showSection('bio',this)">Biographies</div>
+  <div class="nav-tab" onclick="showSection('about',this)">À propos</div>
+</nav>
+
+<main class="content">
+
+  <!-- ═══ VIDEOS ═══ -->
+  <section id="sec-videos" class="section active">
+    <div class="section-title">Vidéos YouTube</div>
+
+    <div class="video-grid" id="video-grid"></div>
+    </div>
+  </section>
+
+  <!-- ═══ MUSIC ═══ -->
+  <section id="sec-music" class="section">
+    <div class="section-title">Titres Audio</div>
+
+    <div class="audio-list" id="audio-list"></div>
+  </section>
+
+  <!-- ═══ BIO ═══ -->
+  <section id="sec-bio" class="section">
+    <div class="section-title">Biographies</div>
+    <div style="display:flex; flex-direction:column; gap:14px; max-width:680px;">
+
+      <!-- Groupe -->
+      <a href="krakens.html" style="text-decoration:none;">
+        <div style="background:var(--bg-mid); border:1px solid var(--border); border-radius:4px; padding:20px 24px; display:flex; align-items:center; gap:20px; transition:border-color 0.2s; cursor:pointer;" onmouseover="this.style.borderColor='var(--green-mid)'" onmouseout="this.style.borderColor='var(--border)'">
+          <div style="width:52px;height:52px;border-radius:50%;background:#1a2a14;border:2px solid var(--green-mid);display:flex;align-items:center;justify-content:center;font-family:'Black Han Sans',sans-serif;font-size:16px;color:var(--green-bright);flex-shrink:0;">TK</div>
+          <div style="flex:1;">
+            <div style="font-family:'Black Han Sans',sans-serif;font-size:17px;color:var(--green-bright);letter-spacing:2px;">LES KRAKENS</div>
+            <div style="font-size:12px;color:var(--text-muted);margin-top:4px;letter-spacing:1px;text-transform:uppercase;">Histoire du groupe · Depuis 2019</div>
+          </div>
+          <div style="font-size:12px;color:var(--green-mid);letter-spacing:1px;text-transform:uppercase;">Lire →</div>
+        </div>
+      </a>
+
+      <!-- Glyn -->
+      <a href="glyn.html" style="text-decoration:none;">
+        <div style="background:var(--bg-mid); border:1px solid var(--border); border-radius:4px; padding:20px 24px; display:flex; align-items:center; gap:20px; transition:border-color 0.2s; cursor:pointer;" onmouseover="this.style.borderColor='var(--green-mid)'" onmouseout="this.style.borderColor='var(--border)'">
+          <div style="width:52px;height:52px;border-radius:50%;background:#1a2a14;border:2px solid var(--green-mid);display:flex;align-items:center;justify-content:center;font-family:'Black Han Sans',sans-serif;font-size:18px;color:var(--green-bright);flex-shrink:0;">G</div>
+          <div style="flex:1;">
+            <div style="font-family:'Black Han Sans',sans-serif;font-size:17px;color:var(--green-bright);letter-spacing:2px;">GLYN</div>
+            <div style="font-size:12px;color:var(--text-muted);margin-top:4px;letter-spacing:1px;text-transform:uppercase;">Chant · Fondateur</div>
+          </div>
+          <div style="font-size:12px;color:var(--green-mid);letter-spacing:1px;text-transform:uppercase;">Lire →</div>
+        </div>
+      </a>
+
+      <!-- Phil -->
+      <a href="phil.html" style="text-decoration:none;">
+        <div style="background:var(--bg-mid); border:1px solid var(--border); border-radius:4px; padding:20px 24px; display:flex; align-items:center; gap:20px; transition:border-color 0.2s; cursor:pointer;" onmouseover="this.style.borderColor='var(--green-mid)'" onmouseout="this.style.borderColor='var(--border)'">
+          <div style="width:52px;height:52px;border-radius:50%;background:#1a2a14;border:2px solid var(--green-mid);display:flex;align-items:center;justify-content:center;font-family:'Black Han Sans',sans-serif;font-size:18px;color:var(--green-bright);flex-shrink:0;">P</div>
+          <div style="flex:1;">
+            <div style="font-family:'Black Han Sans',sans-serif;font-size:17px;color:var(--green-bright);letter-spacing:2px;">PHIL</div>
+            <div style="font-size:12px;color:var(--text-muted);margin-top:4px;letter-spacing:1px;text-transform:uppercase;">Guitare Solo · Compositeur</div>
+          </div>
+          <div style="font-size:12px;color:var(--green-mid);letter-spacing:1px;text-transform:uppercase;">Lire →</div>
+        </div>
+      </a>
+
+      <!-- Bob -->
+      <a href="bob.html" style="text-decoration:none;">
+        <div style="background:var(--bg-mid); border:1px solid var(--border); border-radius:4px; padding:20px 24px; display:flex; align-items:center; gap:20px; transition:border-color 0.2s; cursor:pointer;" onmouseover="this.style.borderColor='var(--green-mid)'" onmouseout="this.style.borderColor='var(--border)'">
+          <div style="width:52px;height:52px;border-radius:50%;background:#1a2a14;border:2px solid var(--green-mid);display:flex;align-items:center;justify-content:center;font-family:'Black Han Sans',sans-serif;font-size:18px;color:var(--green-bright);flex-shrink:0;">B</div>
+          <div style="flex:1;">
+            <div style="font-family:'Black Han Sans',sans-serif;font-size:17px;color:var(--green-bright);letter-spacing:2px;">BOB</div>
+            <div style="font-size:12px;color:var(--text-muted);margin-top:4px;letter-spacing:1px;text-transform:uppercase;">Batterie</div>
+          </div>
+          <div style="font-size:12px;color:var(--green-mid);letter-spacing:1px;text-transform:uppercase;">Lire →</div>
+        </div>
+      </a>
+
+      <!-- Ned -->
+      <a href="ned.html" style="text-decoration:none;">
+        <div style="background:var(--bg-mid); border:1px solid var(--border); border-radius:4px; padding:20px 24px; display:flex; align-items:center; gap:20px; transition:border-color 0.2s; cursor:pointer;" onmouseover="this.style.borderColor='var(--green-mid)'" onmouseout="this.style.borderColor='var(--border)'">
+          <div style="width:52px;height:52px;border-radius:50%;background:#1a2a14;border:2px solid var(--green-mid);display:flex;align-items:center;justify-content:center;font-family:'Black Han Sans',sans-serif;font-size:18px;color:var(--green-bright);flex-shrink:0;">N</div>
+          <div style="flex:1;">
+            <div style="font-family:'Black Han Sans',sans-serif;font-size:17px;color:var(--green-bright);letter-spacing:2px;">NED</div>
+            <div style="font-size:12px;color:var(--text-muted);margin-top:4px;letter-spacing:1px;text-transform:uppercase;">Basse</div>
+          </div>
+          <div style="font-size:12px;color:var(--green-mid);letter-spacing:1px;text-transform:uppercase;">Lire →</div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ═══ ABOUT ═══ -->
+  <section id="sec-about" class="section">
+    <div class="section-title">À propos du groupe</div>
+    <div class="about-card">
+      <p class="about-text" contenteditable="true">
+        The Krakens est un groupe de metal fondé dans les profondeurs... Cliquez ici pour modifier et raconter votre histoire, vos influences, vos dates de concerts, etc.
+      </p>
+      <p class="about-hint">✎ Cliquez sur le texte pour modifier</p>
+      <div class="about-links">
+        <a class="about-link" href="#" onclick="return false">Instagram</a>
+        <a class="about-link" href="#" onclick="return false">Spotify</a>
+        <a class="about-link" href="#" onclick="return false">Bandcamp</a>
+        <a class="about-link" href="#" onclick="return false">YouTube</a>
+        <a class="about-link" href="#" onclick="return false">Contact</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- MODAL vidéo YouTube -->
+<div class="modal-bg" id="video-modal" onclick="closeModal(event)">
+  <div class="modal-inner">
+    <button class="modal-close" onclick="closeModalDirect()" aria-label="Fermer">
+      <i class="ti ti-x" aria-hidden="true"></i>
+    </button>
+    <iframe id="modal-iframe" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+  </div>
+</div>
+
+<script>
+  // ── STATE ──
+  let videoList = [];
+  let trackList = [];
+  let videoIdCounter = 0;
+  let trackIdCounter = 0;
+  let currentPlayingTrackId = null;
+  let audios = {};
+
+  // ── NAVIGATION ──
+  function showSection(name, el) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.getElementById('sec-' + name).classList.add('active');
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  // ── SUBSCRIBE ──
+  let subscribed = false;
+  function toggleSub(btn) {
+    subscribed = !subscribed;
+    btn.textContent = subscribed ? 'Abonné ✓' : "S'abonner";
+    btn.style.background = subscribed ? '#1a3a10' : 'var(--green-bright)';
+    btn.style.color = subscribed ? 'var(--green-bright)' : '#0a0a0f';
+    btn.style.border = subscribed ? '1px solid var(--green-mid)' : 'none';
+  }
+
+  // ── STATS ──
+  function updateStats() {
+    const v = videoList.length, a = trackList.length;
+    document.getElementById('stats-line').textContent =
+      `@thekrakens · ${v} vidéo${v!==1?'s':''} · ${a} titre${a!==1?'s':''}`;
+  }
+
+  // ══════════════════════════════
+  // YOUTUBE HELPERS
+  // ══════════════════════════════
+  function extractYouTubeId(url) {
+    const patterns = [
+      /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/shorts\/)([a-zA-Z0-9_-]{11})/,
+      /youtube\.com\/.*[?&]v=([a-zA-Z0-9_-]{11})/
+    ];
+    for (const p of patterns) {
+      const m = url.match(p);
+      if (m) return m[1];
+    }
+    return null;
+  }
+
+  function ytThumbnail(videoId) {
+    return `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
+  }
+
+  function ytEmbedUrl(videoId) {
+    return `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+  }
+
+  // ══════════════════════════════
+  // VIDEO SECTION
+  // ══════════════════════════════
+  function openAddVideoForm() {
+    document.getElementById('add-video-form').classList.add('open');
+    document.getElementById('add-video-btn').style.display = 'none';
+    document.getElementById('yt-url-input').focus();
+  }
+  function cancelAddVideo() {
+    document.getElementById('add-video-form').classList.remove('open');
+    document.getElementById('add-video-btn').style.display = 'flex';
+    document.getElementById('yt-url-input').value = '';
+    document.getElementById('yt-title-input').value = '';
+  }
+
+  function confirmAddVideo() {
+    const url = document.getElementById('yt-url-input').value.trim();
+    const title = document.getElementById('yt-title-input').value.trim();
+    if (!url) { alert('Collez un lien YouTube valide.'); return; }
+    const videoId = extractYouTubeId(url);
+    if (!videoId) { alert('Lien YouTube non reconnu.\nExemple valide : https://www.youtube.com/watch?v=dQw4w9WgXcQ'); return; }
+    addVideoCard(videoId, title || 'Vidéo sans titre');
+    cancelAddVideo();
+  }
+
+  function addVideoCard(videoId, title) {
+    videoIdCounter++;
+    const id = videoIdCounter;
+    videoList.push({ id, videoId, title });
+
+    const card = document.createElement('div');
+    card.className = 'video-card';
+    card.id = 'vcard-' + id;
+
+    const thumb = ytThumbnail(videoId);
+    card.innerHTML = `
+      <div class="video-thumb">
+        <img class="yt-thumbnail" src="${thumb}" alt="${title}" loading="lazy" />
+        <div class="yt-play-overlay" onclick="openYTModal('${videoId}', '${title.replace(/'/g,"\\'")}')">
+          <div class="yt-play-circle">
+            <i class="ti ti-player-play" style="font-size:20px;color:var(--green-bright);margin-left:3px" aria-hidden="true"></i>
+          </div>
+        </div>
+      </div>
+      <div class="video-meta">
+        <div class="video-title">${title}</div>
+        <div class="video-views">
+          <span style="color:var(--green-mid);font-size:10px;letter-spacing:1px">▶ YOUTUBE</span>
+          &nbsp;·&nbsp;
+          <span style="cursor:pointer;color:var(--text-muted);font-size:11px" onclick="removeVideo(${id})">Supprimer</span>
+        </div>
+      </div>
+    `;
+    document.getElementById('video-grid').appendChild(card);
+    updateStats();
+  }
+
+  function removeVideo(id) {
+    videoList = videoList.filter(v => v.id !== id);
+    const el = document.getElementById('vcard-' + id);
+    if (el) el.remove();
+    updateStats();
+  }
+
+  // ── YOUTUBE MODAL ──
+  function openYTModal(videoId, title) {
+    document.getElementById('modal-iframe').src = ytEmbedUrl(videoId);
+    document.getElementById('video-modal').classList.add('open');
+  }
+  function closeModal(e) {
+    if (e.target === document.getElementById('video-modal')) closeModalDirect();
+  }
+  function closeModalDirect() {
+    document.getElementById('modal-iframe').src = '';
+    document.getElementById('video-modal').classList.remove('open');
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModalDirect(); });
+
+  // ══════════════════════════════
+  // AUDIO SECTION
+  // ══════════════════════════════
+  function openAddTrackForm() {
+    document.getElementById('add-audio-form').classList.add('open');
+    document.getElementById('add-audio-btn').style.display = 'none';
+    document.getElementById('audio-title-input').focus();
+  }
+  function cancelAddTrack() {
+    document.getElementById('add-audio-form').classList.remove('open');
+    document.getElementById('add-audio-btn').style.display = 'flex';
+    document.getElementById('audio-title-input').value = '';
+    document.getElementById('audio-url-input').value = '';
+    document.getElementById('audio-album-input').value = '';
+  }
+
+  function confirmAddTrack() {
+    const title = document.getElementById('audio-title-input').value.trim();
+    const url = document.getElementById('audio-url-input').value.trim();
+    const album = document.getElementById('audio-album-input').value.trim();
+    if (!title) { alert('Entrez un titre pour la chanson.'); return; }
+    if (!url) { alert('Collez un lien audio ou YouTube.'); return; }
+    addTrackCard(title, url, album);
+    cancelAddTrack();
+  }
+
+  function addTrackCard(title, url, album) {
+    trackIdCounter++;
+    const id = trackIdCounter;
+    const isYT = !!extractYouTubeId(url);
+    trackList.push({ id, title, url, album, isYT });
+
+    const track = document.createElement('div');
+    track.className = 'audio-track has-audio';
+    track.id = 'track-' + id;
+
+    const num = String(id).padStart(2, '0');
+    const subLabel = album || (isYT ? 'Lecture via YouTube' : 'Lien audio');
+
+    track.innerHTML = `
+      <div class="audio-top">
+        <span class="track-num">${num}</span>
+        <div class="track-play-btn" id="tplay-${id}" onclick="handleTrackPlay(${id})" role="button" aria-label="Lire ${title}">
+          <i class="ti ti-player-play" style="font-size:16px;color:var(--green-mid)" aria-hidden="true"></i>
+        </div>
+        <div class="track-info" style="display:flex;align-items:center;gap:12px;">
+          <img src="images/logo.jpg" alt="logo" style="width:36px;height:36px;object-fit:cover;border-radius:50%;border:1px solid #2a2a2a;flex-shrink:0;" />
+          <div>
+            <div class="track-name" id="tname-${id}">${title}</div>
+            <div class="track-sub">${subLabel} ${isYT ? '· <span style=\"color:var(--green-mid)\">▶ YT</span>' : ''}</div>
+          </div>
+        </div>
+        <span style="font-size:11px;color:var(--text-muted);cursor:pointer;margin-left:10px" onclick="removeTrack(${id})">✕</span>
+      </div>
+      <div class="track-progress" id="tprogwrap-${id}" style="display:none">
+        <div class="progress-bar-bg" onclick="seekAudio(event,${id})">
+          <div class="progress-bar-fill" id="tprog-${id}"></div>
+        </div>
+        <div class="track-time" id="ttime-${id}">0:00 / 0:00</div>
+      </div>
+    `;
+    document.getElementById('audio-list').appendChild(track);
+    updateStats();
+  }
+
+  function removeTrack(id) {
+    if (audios[id]) { audios[id].pause(); delete audios[id]; }
+    if (currentPlayingTrackId === id) currentPlayingTrackId = null;
+    trackList = trackList.filter(t => t.id !== id);
+    const el = document.getElementById('track-' + id);
+    if (el) el.remove();
+    updateStats();
+  }
+
+  function handleTrackPlay(id) {
+    const track = trackList.find(t => t.id === id);
+    if (!track) return;
+
+    if (track.isYT) {
+      // Open YouTube link in new tab
+      const ytId = extractYouTubeId(track.url);
+      window.open('https://www.youtube.com/watch?v=' + ytId, '_blank');
+      return;
+    }
+
+    // HTML5 audio
+    if (!audios[id]) {
+      audios[id] = new Audio(track.url);
+      audios[id].crossOrigin = 'anonymous';
+
+      audios[id].addEventListener('loadedmetadata', () => {
+        const timeEl = document.getElementById('ttime-' + id);
+        if (timeEl) timeEl.textContent = '0:00 / ' + fmt(audios[id].duration);
+      });
+      audios[id].addEventListener('timeupdate', () => {
+        const a = audios[id];
+        if (!a.duration) return;
+        const pct = (a.currentTime / a.duration) * 100;
+        const fill = document.getElementById('tprog-' + id);
+        if (fill) fill.style.width = Math.round(pct) + '%';
+        const timeEl = document.getElementById('ttime-' + id);
+        if (timeEl) timeEl.textContent = fmt(a.currentTime) + ' / ' + fmt(a.duration);
+      });
+      audios[id].addEventListener('ended', () => {
+        stopTrack(id);
+      });
+      audios[id].addEventListener('error', () => {
+        alert('Impossible de lire ce fichier audio. Vérifiez que le lien est public et direct (pas une page web).');
+        stopTrack(id);
+      });
+    }
+
+    if (currentPlayingTrackId && currentPlayingTrackId !== id) stopTrack(currentPlayingTrackId);
+
+    const a = audios[id];
+    const playBtn = document.getElementById('tplay-' + id);
+    const progWrap = document.getElementById('tprogwrap-' + id);
+    const trackEl = document.getElementById('track-' + id);
+
+    if (a.paused) {
+      a.play();
+      trackEl.classList.add('playing');
+      playBtn.innerHTML = `<i class="ti ti-player-pause" style="font-size:16px;color:var(--green-bright)" aria-hidden="true"></i>`;
+      if (progWrap) progWrap.style.display = 'block';
+      currentPlayingTrackId = id;
+    } else {
+      a.pause();
+      stopTrack(id);
+    }
+  }
+
+  function stopTrack(id) {
+    const a = audios[id];
+    if (a) a.pause();
+    const trackEl = document.getElementById('track-' + id);
+    if (trackEl) trackEl.classList.remove('playing');
+    const playBtn = document.getElementById('tplay-' + id);
+    if (playBtn) playBtn.innerHTML = `<i class="ti ti-player-play" style="font-size:16px;color:var(--green-mid)" aria-hidden="true"></i>`;
+    if (currentPlayingTrackId === id) currentPlayingTrackId = null;
+  }
+
+  function seekAudio(e, id) {
+    const a = audios[id];
+    if (!a || !a.duration) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    a.currentTime = ((e.clientX - rect.left) / rect.width) * a.duration;
+  }
+
+
+  // ══════════════════════════════
+  // INITIALISATION — Vidéos & Musique
+  // ══════════════════════════════
+  document.addEventListener('DOMContentLoaded', function() {
+
+    // ── VIDÉOS YOUTUBE ──
+    const videos = [
+      { id: 'sx8LkTgw6jU', title: 'Les Krakens · Live' },
+      { id: 'XXgNeMyLStM', title: 'Les Krakens · Live' },
+      { id: '6pN9mVmwdv4', title: 'Les Krakens · Live' },
+      { id: 'ZoOHlq0VGsk', title: 'Les Krakens · Live' },
+    ];
+    videos.forEach(v => addVideoCard(v.id, v.title));
+
+    // ── TITRES MP3 ──
+    const tracks = [
+      { title: 'Kraken',             url: 'audio/Kraken.mp3',             album: 'Les Krakens' },
+      { title: 'Decadence',          url: 'audio/Decadence.mp3',          album: 'Les Krakens' },
+      { title: 'Song Of Resilience', url: 'audio/Song_Of_Resilience.mp3', album: 'Les Krakens' },
+      { title: 'Hotel Gate',         url: 'audio/Hotel_Gate.mp3',         album: 'Les Krakens' },
+      { title: 'Pray The Lord',      url: 'audio/Pray_the_lord.mp3',      album: 'Les Krakens' },
+      { title: 'Samurai',            url: 'audio/Samurai.mp3',            album: 'Les Krakens' },
+    ];
+    tracks.forEach(t => addTrackCard(t.title, t.url, t.album));
+
+  });
+
+  function fmt(s) {
+    const t = Math.floor(s);
+    return Math.floor(t / 60) + ':' + String(t % 60).padStart(2, '0');
+  }
+</script>
+</body>
+</html>
