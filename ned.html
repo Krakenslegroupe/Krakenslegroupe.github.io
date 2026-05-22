@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ned – Biographie · Les Krakens</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Crimson+Pro:wght@300;400;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #0d0d0d; color: #e8e2d9; font-family: 'Crimson Pro', Georgia, serif; min-height: 100vh; }
+    header { position: relative; overflow: hidden; background: #111; padding: 80px 40px 60px; text-align: center; border-bottom: 1px solid #2a2a2a; }
+    header::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 0%, rgba(180,30,30,0.18) 0%, transparent 70%); pointer-events: none; }
+    .band-name { font-size: 13px; font-weight: 300; letter-spacing: 5px; text-transform: uppercase; color: #b41e1e; margin-bottom: 18px; }
+    h1 { font-family: 'Playfair Display', serif; font-size: clamp(60px, 10vw, 110px); font-weight: 700; color: #f0ebe3; line-height: 1; letter-spacing: -2px; }
+    .sub { font-size: 14px; font-weight: 300; letter-spacing: 4px; text-transform: uppercase; color: #666; margin-top: 16px; }
+    .lang-switcher { position: absolute; top: 24px; right: 32px; display: flex; gap: 6px; z-index: 10; }
+    .lang-btn { background: transparent; border: 1px solid #333; color: #666; font-family: 'Crimson Pro', serif; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; padding: 6px 14px; cursor: pointer; transition: all 0.2s; border-radius: 2px; }
+    .lang-btn.active { border-color: #b41e1e; color: #b41e1e; }
+    .lang-btn:hover { border-color: #888; color: #ccc; }
+    .nav-back { position: absolute; top: 24px; left: 32px; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: #555; text-decoration: none; transition: color 0.2s; }
+    .nav-back:hover { color: #b41e1e; }
+    main { max-width: 780px; margin: 0 auto; padding: 70px 40px 100px; }
+    .bio-text { font-size: 20px; font-weight: 300; line-height: 1.9; color: #cec8bf; }
+    .bio-text p + p { margin-top: 1.8em; }
+    .bio-text em { font-style: italic; font-family: 'Playfair Display', serif; font-size: 21px; color: #e8e2d9; }
+    .section-divider { display: flex; align-items: center; gap: 16px; margin: 3rem 0 2rem; }
+    .section-divider span { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #b41e1e; white-space: nowrap; }
+    .section-divider::before, .section-divider::after { content: ''; flex: 1; height: 1px; background: #2a2a2a; }
+    .timeline { margin-top: 60px; padding-top: 40px; border-top: 1px solid #222; }
+    .timeline-title { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #555; margin-bottom: 24px; }
+    .timeline-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+    .t-item { display: flex; align-items: center; gap: 8px; background: #161616; border: 1px solid #222; border-radius: 4px; padding: 8px 14px; }
+    .t-year { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 700; color: #b41e1e; }
+    .t-label { font-size: 14px; font-weight: 300; color: #999; }
+    footer { text-align: center; padding: 30px; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: #333; border-top: 1px solid #1a1a1a; }
+    .member-photo-wrap { display: flex; justify-content: center; margin-bottom: 50px; }
+    [data-lang] { display: none; }
+    [data-lang].visible { display: block; }
+    /* PHOTO */
+
+  </style>
+</head>
+<body>
+  <header>
+    <a class="nav-back" href="index.html">← Les Krakens</a>
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLang('fr')">FR</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+    </div>
+    <p class="band-name">Les Krakens</p>
+    <h1>Ned</h1>
+    <p class="sub" data-lang="fr" style="display:block">Bassiste &nbsp;·&nbsp; Biographie</p>
+    <p class="sub" data-lang="en">Bassist &nbsp;·&nbsp; Biography</p>
+  </header>
+
+  <main>
+    <div class="member-photo-wrap">
+      <img class="member-photo" src="images/ned.jpg" alt="Ned – Les Krakens" style="width:100%;max-width:600px;height:400px;object-fit:cover;object-position:center 15%;border-radius:4px;border:1px solid #2a2a2a;" />
+    </div>
+    <!-- FRANÇAIS -->
+    <div data-lang="fr" class="visible">
+      <div class="bio-text">
+        <p>Né Nenad le 24 août 1986 en Croatie, Ned joue de la basse depuis plus de 22 ans — une vie menée avec une liberté assumée et une passion intacte pour le son lourd. C'est dans son pays natal qu'il forge ses premières armes : bassiste de <em>Croatian Bad Blood</em> (hardcore), il enregistre trois albums et construit un jeu robuste, ancré dans la puissance et la précision. Il passe ensuite chez <em>Irish Fornth</em> (death mélodique), où il contribue à un EP qui affine encore son identité musicale.</p>
+        <p>Son arrivée en France ouvre un nouveau chapitre. Il rejoint <em>Lost &amp; Unfound</em>, enregistre un album et enchaîne les concerts, explorant un son plus posé sans jamais perdre de vue ses racines metal. Puis les <em>Krakens</em> entrent dans sa vie — et avec eux, la bonne étincelle : une complicité naturelle entre les membres et un son heavy metal qui lui colle à la peau.</p>
+        <p>Sur scène, Ned s'appuie sur une <em>Spector NS II 5</em> et une tête <em>Ampeg SVT-7</em> couplée à une <em>V-4B</em>, avec des baffles 4x10 et 2x10. Il enrichit son signal avec une pédale <em>Darkglass B7K</em> pour la distorsion et un préampli <em>Ampeg Classic</em> pour le grain supplémentaire. Son graal ? Une <em>Spector Euro 5</em> sur une <em>Ampeg SVT-2</em> avec un baffle 8x10. Ses influences voyagent de <em>Judas Priest</em> à <em>Pantera</em>, d'<em>Iron Maiden</em> à <em>System of a Down</em>, en passant par <em>Black Sabbath</em>, <em>Slayer</em>, <em>Dio</em>, <em>Helloween</em> ou <em>Stratovarius</em> — et la scène locale croate, qui lui a tout appris.</p>
+      </div>
+      <div class="timeline">
+        <p class="timeline-title">Repères</p>
+        <div class="timeline-grid">
+          <div class="t-item"><span class="t-year">1986</span><span class="t-label">Naissance · Croatie</span></div>
+          <div class="t-item"><span class="t-year">~2003</span><span class="t-label">Premières basses</span></div>
+          <div class="t-item"><span class="t-year">Croatian Bad Blood</span><span class="t-label">3 albums · Hardcore</span></div>
+          <div class="t-item"><span class="t-year">Irish Fornth</span><span class="t-label">EP · Death mélodique</span></div>
+          <div class="t-item"><span class="t-year">Lost &amp; Unfound</span><span class="t-label">Album · France</span></div>
+          <div class="t-item"><span class="t-year">Les Krakens</span><span class="t-label">Heavy Metal · Lyon</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ENGLISH -->
+    <div data-lang="en">
+      <div class="bio-text">
+        <p>Born Nenad on August 24, 1986 in Croatia, Ned has been playing bass for over 22 years — living life on his own terms, with an unshakeable passion for heavy sound. Back home, he cut his teeth as bassist for <em>Croatian Bad Blood</em> (hardcore), recording three albums and developing a playing style built on power and precision. He then joined <em>Irish Fornth</em> (melodic death metal), contributing to an EP that further sharpened his musical identity.</p>
+        <p>Moving to France opened a new chapter. He joined <em>Lost &amp; Unfound</em>, recorded an album and played a string of gigs, exploring a broader sonic palette while never losing sight of his metal roots. Then the <em>Krakens</em> came along — and with them, the right spark: a genuine chemistry between the members and a heavy metal sound that felt like home.</p>
+        <p>On stage, Ned runs a <em>Spector NS II 5</em> through an <em>Ampeg SVT-7</em> and <em>V-4B</em> head with 4x10 and 2x10 cabs. His signal chain includes a <em>Darkglass B7K</em> for distortion and an <em>Ampeg Classic</em> preamp for extra punch. The dream rig? A <em>Spector Euro 5</em> into an <em>Ampeg SVT-2</em> with an 8x10 cab. His influences range from <em>Judas Priest</em> to <em>Pantera</em>, <em>Iron Maiden</em> to <em>System of a Down</em>, with stops at <em>Black Sabbath</em>, <em>Slayer</em>, <em>Dio</em>, <em>Helloween</em>, <em>Stratovarius</em> — and the Croatian local scene that started it all.</p>
+      </div>
+      <div class="timeline">
+        <p class="timeline-title">Timeline</p>
+        <div class="timeline-grid">
+          <div class="t-item"><span class="t-year">1986</span><span class="t-label">Born · Croatia</span></div>
+          <div class="t-item"><span class="t-year">~2003</span><span class="t-label">First bass</span></div>
+          <div class="t-item"><span class="t-year">Croatian Bad Blood</span><span class="t-label">3 albums · Hardcore</span></div>
+          <div class="t-item"><span class="t-year">Irish Fornth</span><span class="t-label">EP · Melodic Death</span></div>
+          <div class="t-item"><span class="t-year">Lost &amp; Unfound</span><span class="t-label">Album · France</span></div>
+          <div class="t-item"><span class="t-year">Les Krakens</span><span class="t-label">Heavy Metal · Lyon</span></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>Les Krakens &nbsp;·&nbsp; Lyon</footer>
+  <script>
+    function setLang(lang) {
+      document.querySelectorAll('[data-lang]').forEach(el => el.classList.toggle('visible', el.dataset.lang === lang));
+      document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.toggle('active', btn.textContent.toLowerCase() === lang));
+      document.documentElement.lang = lang;
+    }
+  </script>
+</body>
+</html>

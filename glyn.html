@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Glyn – Biographie · Les Krakens</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Crimson+Pro:wght@300;400;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #0d0d0d; color: #e8e2d9; font-family: 'Crimson Pro', Georgia, serif; min-height: 100vh; }
+    header { position: relative; overflow: hidden; background: #111; padding: 80px 40px 60px; text-align: center; border-bottom: 1px solid #2a2a2a; }
+    header::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 0%, rgba(180,30,30,0.18) 0%, transparent 70%); pointer-events: none; }
+    .band-name { font-size: 13px; font-weight: 300; letter-spacing: 5px; text-transform: uppercase; color: #b41e1e; margin-bottom: 18px; }
+    h1 { font-family: 'Playfair Display', serif; font-size: clamp(60px, 10vw, 110px); font-weight: 700; color: #f0ebe3; line-height: 1; letter-spacing: -2px; }
+    .sub { font-size: 14px; font-weight: 300; letter-spacing: 4px; text-transform: uppercase; color: #666; margin-top: 16px; }
+    .lang-switcher { position: absolute; top: 24px; right: 32px; display: flex; gap: 6px; z-index: 10; }
+    .lang-btn { background: transparent; border: 1px solid #333; color: #666; font-family: 'Crimson Pro', serif; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; padding: 6px 14px; cursor: pointer; transition: all 0.2s; border-radius: 2px; }
+    .lang-btn.active { border-color: #b41e1e; color: #b41e1e; }
+    .nav-back { position: absolute; top: 24px; left: 32px; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: #555; text-decoration: none; transition: color 0.2s; }
+    .nav-back:hover { color: #b41e1e; }
+    main { max-width: 780px; margin: 0 auto; padding: 70px 40px 100px; }
+    .member-photo-wrap { display: flex; justify-content: center; margin-bottom: 50px; }
+    .member-photo { width: 100%; max-width: 600px; height: 400px; object-fit: cover; object-position:center 20%; border-radius: 4px; border: 1px solid #2a2a2a; }
+    .bio-text { font-size: 20px; font-weight: 300; line-height: 1.9; color: #cec8bf; }
+    .bio-text p + p { margin-top: 1.8em; }
+    .bio-text em { font-style: italic; font-family: 'Playfair Display', serif; font-size: 21px; color: #e8e2d9; }
+    .section-divider { display: flex; align-items: center; gap: 16px; margin: 3rem 0 2rem; }
+    .section-divider span { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #b41e1e; white-space: nowrap; }
+    .section-divider::before, .section-divider::after { content: ''; flex: 1; height: 1px; background: #2a2a2a; }
+    .timeline { margin-top: 60px; padding-top: 40px; border-top: 1px solid #222; }
+    .timeline-title { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #555; margin-bottom: 24px; }
+    .timeline-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+    .t-item { display: flex; align-items: center; gap: 8px; background: #161616; border: 1px solid #222; border-radius: 4px; padding: 8px 14px; }
+    .t-year { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 700; color: #b41e1e; }
+    .t-label { font-size: 14px; font-weight: 300; color: #999; }
+    footer { text-align: center; padding: 30px; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: #333; border-top: 1px solid #1a1a1a; }
+    [data-lang] { display: none; }
+    [data-lang].visible { display: block; }
+  </style>
+</head>
+<body>
+  <header>
+    <a class="nav-back" href="index.html">← Les Krakens</a>
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLang('fr')">FR</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+    </div>
+    <p class="band-name">Les Krakens</p>
+    <h1>Glyn</h1>
+    <p class="sub" data-lang="fr" style="display:block">Chanteur &nbsp;·&nbsp; Biographie</p>
+    <p class="sub" data-lang="en">Lead Singer &nbsp;·&nbsp; Biography</p>
+  </header>
+  <main>
+    <div class="member-photo-wrap">
+      <img class="member-photo" src="images/glyn.jpg" style="width:100%;max-width:600px;height:400px;object-fit:cover;object-position:center 20%;border-radius:4px;border:1px solid #2a2a2a;display:block;" alt="Glyn – Chanteur Les Krakens" />
+    </div>
+    <div data-lang="fr" class="visible">
+      <div class="bio-text">
+        <p>Né en 1970, Glyn n'a jamais prévu de monter sur scène. C'est presque par accident qu'il découvre sa voix en 1994 — devant <em>300 personnes</em> stupéfaites. Ce baptême du feu inattendu lui vaut d'être immédiatement repéré par un groupe naissant : les <em>Blind Runners</em>. Pendant plus d'une décennie, il écume avec eux les pubs de Lyon tous les quinze jours, interprétant avec une gouaille naturelle les classiques du rock, du blues et du funk, avec une tendresse particulière pour les <em>Rolling Stones</em>.</p>
+        <p>Après la séparation des Blind Runners en 2007, Glyn s'éloigne des scènes pendant dix ans — sans jamais vraiment lâcher la musique. En novembre 2016, il repart de zéro avec <em>Glyn le groupe</em>, un retour aux sources à travers les grands classiques du rock et du blues.</p>
+        <div class="section-divider"><span>Les Krakens</span></div>
+        <p>En janvier 2019, Glyn franchit une nouvelle étape et fonde <em>Les Krakens</em>. Le groupe ne se contente plus de reprises : il les réinvente, les tord, les électrise à sa propre sauce — et commence à composer ses propres morceaux. Bob rejoint l'aventure la même année. En février 2022, l'arrivée de <em>Phil</em> marque le tournant metal du groupe. En septembre 2025, <em>Ned</em> vient compléter la formation à la basse. Une bête de scène est née.</p>
+      </div>
+      <div class="timeline">
+        <p class="timeline-title">Repères</p>
+        <div class="timeline-grid">
+          <div class="t-item"><span class="t-year">1970</span><span class="t-label">Naissance</span></div>
+          <div class="t-item"><span class="t-year">1994</span><span class="t-label">Les Blind Runners</span></div>
+          <div class="t-item"><span class="t-year">1994–2007</span><span class="t-label">Scènes lyonnaises</span></div>
+          <div class="t-item"><span class="t-year">2007</span><span class="t-label">Séparation</span></div>
+          <div class="t-item"><span class="t-year">2016</span><span class="t-label">Glyn le groupe</span></div>
+          <div class="t-item"><span class="t-year">Jan. 2019</span><span class="t-label">Fonde Les Krakens</span></div>
+          <div class="t-item"><span class="t-year">Fév. 2022</span><span class="t-label">Tournant metal avec Phil</span></div>
+          <div class="t-item"><span class="t-year">Sept. 2025</span><span class="t-label">Arrivée de Ned</span></div>
+        </div>
+      </div>
+    </div>
+    <div data-lang="en">
+      <div class="bio-text">
+        <p>Born in 1970, Glyn never planned to be a frontman. It was almost by accident that he found his voice in 1994 — standing in front of <em>300 people</em> who had no idea what was about to hit them. The <em>Blind Runners</em> spotted him immediately. For over a decade, he performed every two weeks with raw, natural charisma and a special fondness for the <em>Rolling Stones</em>.</p>
+        <p>When the Blind Runners split in 2007, Glyn stepped back for ten years. In November 2016, he started fresh with <em>Glyn le groupe</em>, a return to rock and blues classics.</p>
+        <div class="section-divider"><span>Les Krakens</span></div>
+        <p>In January 2019, Glyn founded <em>Les Krakens</em>. The band stopped merely covering songs and started reshaping them with its own identity. Bob joined the same year. In February 2022, the arrival of <em>Phil</em> marked the band's metal turning point. Then in September 2025, <em>Ned</em> completed the lineup on bass. The monster had awakened.</p>
+      </div>
+      <div class="timeline">
+        <p class="timeline-title">Timeline</p>
+        <div class="timeline-grid">
+          <div class="t-item"><span class="t-year">1970</span><span class="t-label">Born</span></div>
+          <div class="t-item"><span class="t-year">1994</span><span class="t-label">The Blind Runners</span></div>
+          <div class="t-item"><span class="t-year">1994–2007</span><span class="t-label">Lyon pub circuit</span></div>
+          <div class="t-item"><span class="t-year">2007</span><span class="t-label">Band split</span></div>
+          <div class="t-item"><span class="t-year">2016</span><span class="t-label">Glyn le groupe</span></div>
+          <div class="t-item"><span class="t-year">Jan. 2019</span><span class="t-label">Founds Les Krakens</span></div>
+          <div class="t-item"><span class="t-year">Feb. 2022</span><span class="t-label">Metal turning point with Phil</span></div>
+          <div class="t-item"><span class="t-year">Sept. 2025</span><span class="t-label">Ned joins</span></div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer>Les Krakens &nbsp;·&nbsp; Lyon</footer>
+  <script>
+    function setLang(lang) {
+      document.querySelectorAll('[data-lang]').forEach(el => el.classList.toggle('visible', el.dataset.lang === lang));
+      document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.toggle('active', btn.textContent.toLowerCase() === lang));
+      document.documentElement.lang = lang;
+    }
+  </script>
+</body>
+</html>
