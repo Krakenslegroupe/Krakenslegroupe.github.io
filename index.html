@@ -607,6 +607,34 @@
     a.currentTime = ((e.clientX - rect.left) / rect.width) * a.duration;
   }
 
+
+  // ══════════════════════════════
+  // INITIALISATION — Vidéos & Musique
+  // ══════════════════════════════
+  document.addEventListener('DOMContentLoaded', function() {
+
+    // ── VIDÉOS YOUTUBE ──
+    const videos = [
+      { id: 'sx8LkTgw6jU', title: 'Les Krakens · Live' },
+      { id: 'XXgNeMyLStM', title: 'Les Krakens · Live' },
+      { id: '6pN9mVmwdv4', title: 'Les Krakens · Live' },
+      { id: 'ZoOHlq0VGsk', title: 'Les Krakens · Live' },
+    ];
+    videos.forEach(v => addVideoCard(v.id, v.title));
+
+    // ── TITRES MP3 ──
+    const tracks = [
+      { title: 'Kraken',             url: 'audio/Kraken.mp3',             album: 'Les Krakens' },
+      { title: 'Decadence',          url: 'audio/Decadence.mp3',          album: 'Les Krakens' },
+      { title: 'Song Of Resilience', url: 'audio/Song_Of_Resilience.mp3', album: 'Les Krakens' },
+      { title: 'Hotel Gate',         url: 'audio/Hotel_Gate.mp3',         album: 'Les Krakens' },
+      { title: 'Pray The Lord',      url: 'audio/Pray_the_lord.mp3',      album: 'Les Krakens' },
+      { title: 'Samurai',            url: 'audio/Samurai.mp3',            album: 'Les Krakens' },
+    ];
+    tracks.forEach(t => addTrackCard(t.title, t.url, t.album));
+
+  });
+
   function fmt(s) {
     const t = Math.floor(s);
     return Math.floor(t / 60) + ':' + String(t % 60).padStart(2, '0');
