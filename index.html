@@ -198,7 +198,8 @@
 
 <!-- NAV -->
 <nav class="nav-tabs">
-  <div class="nav-tab active" onclick="showSection('videos',this)">Vidéos</div>
+  <div class="nav-tab active" onclick="showSection('accueil',this)">Accueil</div>
+  <div class="nav-tab" onclick="showSection('videos',this)">Vidéos</div>
   <div class="nav-tab" onclick="showSection('music',this)">Musique</div>
   <div class="nav-tab" onclick="showSection('bio',this)">Biographies</div>
   <div class="nav-tab" onclick="showSection('about',this)">À propos</div>
@@ -207,7 +208,37 @@
 <main class="content">
 
   <!-- ═══ VIDEOS ═══ -->
-  <section id="sec-videos" class="section active">
+    <!-- ACCUEIL -->
+  <section id="sec-accueil" class="section active">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:32px;padding:20px 0 40px;">
+
+      <!-- Grande photo kraken -->
+      <div style="width:100%;max-width:800px;border-radius:6px;overflow:hidden;border:1px solid #1e3e1e;box-shadow:0 0 40px rgba(90,200,60,0.08);">
+        <img src="hero.jpg" alt="Les Krakens" style="width:100%;display:block;object-fit:cover;max-height:500px;object-position:center 20%;" />
+      </div>
+
+      <!-- Logo + texte -->
+      <div style="display:flex;flex-direction:column;align-items:center;gap:20px;max-width:680px;text-align:center;">
+        <img src="logo.jpg" alt="Logo Les Krakens" style="width:180px;height:180px;object-fit:cover;border-radius:50%;border:2px solid #2a4a2a;box-shadow:0 0 20px rgba(90,200,60,0.15);" />
+        <p style="font-size:15px;color:var(--text-secondary);line-height:1.85;font-weight:300;">
+          Fondés à Lyon en 2019, Les Krakens sont un groupe de hard rock et heavy metal qui puise son énergie dans les profondeurs. Forts de 17 compositions originales, ils entrent en studio en mai 2026 pour enregistrer un nouvel EP.
+        </p>
+      </div>
+
+      <!-- Liens réseaux sociaux -->
+      <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;">
+        <a href="https://www.facebook.com/profile.php?id=61589916839327" target="_blank" rel="noopener" class="about-link">📘 Facebook Page</a>
+        <a href="https://www.facebook.com/groups/534038956806240" target="_blank" rel="noopener" class="about-link">👥 Facebook Groupe</a>
+        <a href="https://www.youtube.com/@TheKrakens-t4s" target="_blank" rel="noopener" class="about-link">▶ YouTube</a>
+        <a href="https://soundcloud.com/krakens-le-groupe/albums" target="_blank" rel="noopener" class="about-link">🔊 SoundCloud</a>
+        <a href="https://krakens1.bandcamp.com/album/krakens-ep" target="_blank" rel="noopener" class="about-link">🎵 Bandcamp</a>
+        <a href="krakens.html" class="about-link">📖 Biographie</a>
+      </div>
+
+    </div>
+  </section>
+
+<section id="sec-videos" class="section">
     <div class="section-title">Vidéos YouTube</div>
 
     <div class="video-grid" id="video-grid"></div>
@@ -293,16 +324,16 @@
   <section id="sec-about" class="section">
     <div class="section-title">À propos du groupe</div>
     <div class="about-card">
-      <p class="about-text" contenteditable="true">
-        The Krakens est un groupe de metal fondé dans les profondeurs... Cliquez ici pour modifier et raconter votre histoire, vos influences, vos dates de concerts, etc.
+      <p class="about-text">
+        Fondés à Lyon en 2019, Les Krakens sont un groupe de hard rock et heavy metal qui puise son énergie dans les profondeurs. Partis de reprises revisitées — de Metallica à AC/DC en passant par Iron Maiden — ils ont évolué vers un metal de plus en plus personnel et affirmé. En 2024, ils franchissent une étape décisive avec la sortie de leur premier CD de compositions originales. En mai 2026, ils entrent en studio pour enregistrer un nouvel EP fort de 17 titres. Une bête de scène est née.
       </p>
-      <p class="about-hint">✎ Cliquez sur le texte pour modifier</p>
       <div class="about-links">
-        <a class="about-link" href="#" onclick="return false">Instagram</a>
-        <a class="about-link" href="#" onclick="return false">Spotify</a>
-        <a class="about-link" href="#" onclick="return false">Bandcamp</a>
-        <a class="about-link" href="#" onclick="return false">YouTube</a>
-        <a class="about-link" href="#" onclick="return false">Contact</a>
+        <a class="about-link" href="https://www.facebook.com/profile.php?id=61589916839327" target="_blank" rel="noopener">Facebook Page</a>
+        <a class="about-link" href="https://www.facebook.com/groups/534038956806240" target="_blank" rel="noopener">Facebook Groupe</a>
+        <a class="about-link" href="https://www.youtube.com/@TheKrakens-t4s" target="_blank" rel="noopener">YouTube</a>
+        <a class="about-link" href="https://soundcloud.com/krakens-le-groupe/albums" target="_blank" rel="noopener">SoundCloud</a>
+        <a class="about-link" href="https://krakens1.bandcamp.com/album/krakens-ep" target="_blank" rel="noopener">Bandcamp</a>
+        <a class="about-link" href="krakens.html">Biographie complète</a>
       </div>
     </div>
   </section>
