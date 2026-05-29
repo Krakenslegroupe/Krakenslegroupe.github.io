@@ -4,405 +4,188 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Galerie Photos · The Krakens</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --bg-deep: #0a0a0f;
-      --bg-mid: #111118;
-      --bg-card: #16161f;
-      --border: #1e1e2e;
-      --green-bright: #c9f0a0;
-      --green-mid: #5ac83c;
-      --text-primary: #e8e4dc;
-      --text-secondary: #8a8a9a;
-      --text-muted: #4a4a5a;
+      --bg-deep: #0a0a0f; --bg-mid: #111118; --bg-card: #16161f;
+      --border: #1e1e2e; --green-bright: #c9f0a0; --green-mid: #5ac83c;
+      --text-primary: #e8e4dc; --text-secondary: #8a8a9a; --text-muted: #4a4a5a;
     }
     body { background: var(--bg-deep); color: var(--text-primary); font-family: 'Barlow', sans-serif; min-height: 100vh; }
-
-    /* HEADER */
-    .page-header {
-      background: var(--bg-mid);
-      border-bottom: 1px solid var(--border);
-      padding: 18px 32px;
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    .nav-back {
-      font-size: 12px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      text-decoration: none;
-      transition: color 0.2s;
-      border: 1px solid var(--border);
-      padding: 7px 14px;
-      border-radius: 2px;
-    }
+    .page-header { background: var(--bg-mid); border-bottom: 1px solid var(--border); padding: 16px 32px; display: flex; align-items: center; gap: 16px; position: sticky; top: 0; z-index: 100; }
+    .nav-back { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); text-decoration: none; border: 1px solid var(--border); padding: 7px 14px; border-radius: 2px; transition: all 0.2s; }
     .nav-back:hover { color: var(--green-bright); border-color: var(--green-mid); }
-    .page-title {
-      font-family: 'Black Han Sans', sans-serif;
-      font-size: 18px;
-      color: var(--green-bright);
-      letter-spacing: 3px;
-      flex: 1;
-    }
-    .lang-switcher { display: flex; gap: 6px; }
-    .lang-btn {
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--text-muted);
-      font-family: 'Barlow', sans-serif;
-      font-size: 11px;
-      letter-spacing: 2px;
-      padding: 5px 12px;
-      cursor: pointer;
-      border-radius: 2px;
-      transition: all 0.2s;
-    }
-    .lang-btn.active { border-color: var(--green-mid); color: var(--green-bright); }
-
-    /* HERO BANNER */
-    .gallery-hero {
-      background: var(--bg-mid);
-      border-bottom: 1px solid var(--border);
-      padding: 40px 32px 30px;
-      text-align: center;
-    }
-    .gallery-hero h1 {
-      font-family: 'Black Han Sans', sans-serif;
-      font-size: 42px;
-      color: var(--green-bright);
-      letter-spacing: 6px;
-      text-shadow: 0 0 30px rgba(90,200,60,0.3);
-    }
-    .gallery-hero p {
-      font-size: 13px;
-      color: var(--text-muted);
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      margin-top: 8px;
-    }
-
-    /* CONTENT */
-    .content { padding: 32px; max-width: 1200px; }
-
-    /* FILTER TABS */
-    .filter-tabs { display: flex; gap: 8px; margin-bottom: 28px; flex-wrap: wrap; }
-    .filter-btn {
-      font-size: 11px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      border: 1px solid var(--border);
-      background: transparent;
-      padding: 7px 16px;
-      border-radius: 2px;
-      cursor: pointer;
-      font-family: 'Barlow', sans-serif;
-      transition: all 0.2s;
-    }
+    .page-title { font-family: 'Black Han Sans', sans-serif; font-size: 18px; color: var(--green-bright); letter-spacing: 3px; flex: 1; }
+    .gallery-hero { background: var(--bg-mid); border-bottom: 1px solid var(--border); padding: 36px 32px 28px; text-align: center; }
+    .gallery-hero h1 { font-family: 'Black Han Sans', sans-serif; font-size: 40px; color: var(--green-bright); letter-spacing: 6px; text-shadow: 0 0 30px rgba(90,200,60,0.3); }
+    .gallery-hero p { font-size: 12px; color: var(--text-muted); letter-spacing: 3px; text-transform: uppercase; margin-top: 8px; }
+    .content { padding: 28px 32px; max-width: 1200px; }
+    .filter-tabs { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+    .filter-btn { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); border: 1px solid var(--border); background: transparent; padding: 7px 16px; border-radius: 2px; cursor: pointer; font-family: 'Barlow', sans-serif; transition: all 0.2s; }
     .filter-btn.active, .filter-btn:hover { border-color: var(--green-mid); color: var(--green-bright); background: rgba(90,200,60,0.05); }
-
-    /* PHOTO GRID */
-    .photo-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 16px;
-    }
-    .photo-item {
-      position: relative;
-      aspect-ratio: 4/3;
-      overflow: hidden;
-      border-radius: 4px;
-      border: 1px solid var(--border);
-      cursor: pointer;
-      transition: border-color 0.2s, transform 0.2s;
-    }
+    .photo-count { font-size: 11px; color: var(--text-muted); letter-spacing: 1px; margin-bottom: 16px; }
+    .photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+    .photo-item { position: relative; aspect-ratio: 4/3; overflow: hidden; border-radius: 4px; border: 1px solid var(--border); cursor: pointer; transition: border-color 0.2s, transform 0.2s; }
     .photo-item:hover { border-color: var(--green-mid); transform: translateY(-2px); }
-    .photo-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.3s;
-    }
+    .photo-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s; }
     .photo-item:hover img { transform: scale(1.04); }
-    .photo-overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(0,0,0,0);
-      display: flex;
-      align-items: flex-end;
-      padding: 14px;
-      transition: background 0.2s;
-    }
+    .photo-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0); display: flex; align-items: flex-end; padding: 12px; transition: background 0.2s; }
     .photo-item:hover .photo-overlay { background: rgba(0,0,0,0.5); }
-    .photo-caption {
-      font-size: 12px;
-      color: var(--green-bright);
-      letter-spacing: 1px;
-      opacity: 0;
-      transition: opacity 0.2s;
-    }
+    .photo-caption { font-size: 12px; color: var(--green-bright); letter-spacing: 1px; opacity: 0; transition: opacity 0.2s; }
     .photo-item:hover .photo-caption { opacity: 1; }
-
+    .empty-state { text-align: center; padding: 60px 20px; color: var(--text-muted); grid-column: 1/-1; }
+    .empty-icon { font-size: 48px; margin-bottom: 16px; opacity: 0.3; }
+    .empty-state p { font-size: 13px; letter-spacing: 1px; line-height: 2; }
     /* LIGHTBOX */
-    .lightbox {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.96);
-      z-index: 300;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-    }
+    .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.96); z-index: 300; align-items: center; justify-content: center; flex-direction: column; }
     .lightbox.open { display: flex; }
-    .lightbox-img {
-      max-width: 90vw;
-      max-height: 82vh;
-      object-fit: contain;
-      border-radius: 4px;
-      border: 1px solid var(--border);
-    }
-    .lightbox-caption {
-      margin-top: 14px;
-      font-size: 13px;
-      color: var(--text-secondary);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-    .lightbox-close {
-      position: absolute;
-      top: 20px;
-      right: 24px;
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--text-secondary);
-      font-size: 22px;
-      width: 40px;
-      height: 40px;
-      border-radius: 2px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: border-color 0.2s, color 0.2s;
-    }
+    .lightbox-img { max-width: 90vw; max-height: 82vh; object-fit: contain; border-radius: 4px; }
+    .lightbox-caption { margin-top: 12px; font-size: 12px; color: var(--text-secondary); letter-spacing: 2px; text-transform: uppercase; }
+    .lightbox-close { position: absolute; top: 18px; right: 22px; background: transparent; border: 1px solid var(--border); color: var(--text-secondary); font-size: 20px; width: 38px; height: 38px; border-radius: 2px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
     .lightbox-close:hover { border-color: var(--green-mid); color: var(--green-bright); }
-    .lightbox-nav {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(0,0,0,0.6);
-      border: 1px solid var(--border);
-      color: var(--text-secondary);
-      font-size: 24px;
-      width: 48px;
-      height: 48px;
-      border-radius: 2px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: border-color 0.2s, color 0.2s;
-    }
+    .lightbox-nav { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.6); border: 1px solid var(--border); color: var(--text-secondary); font-size: 26px; width: 48px; height: 48px; border-radius: 2px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
     .lightbox-nav:hover { border-color: var(--green-mid); color: var(--green-bright); }
-    .lightbox-prev { left: 20px; }
-    .lightbox-next { right: 20px; }
-    .lightbox-counter {
-      position: absolute;
-      bottom: 20px;
-      font-size: 11px;
-      color: var(--text-muted);
-      letter-spacing: 2px;
-    }
-
-    /* EMPTY STATE */
-    .empty-state {
-      text-align: center;
-      padding: 80px 20px;
-      color: var(--text-muted);
-    }
-    .empty-state .icon { font-size: 48px; margin-bottom: 16px; opacity: 0.3; }
-    .empty-state p { font-size: 13px; letter-spacing: 2px; text-transform: uppercase; line-height: 1.8; }
-    .empty-state code { background: var(--bg-card); padding: 2px 8px; border-radius: 2px; color: var(--green-mid); font-size: 12px; }
-
-    [data-lang] { display: none; }
-    [data-lang].visible { display: block; }
+    .lightbox-prev { left: 18px; }
+    .lightbox-next { right: 18px; }
+    .lightbox-counter { position: absolute; bottom: 18px; font-size: 11px; color: var(--text-muted); letter-spacing: 2px; }
   </style>
 </head>
 <body>
 
-<!-- HEADER -->
 <div class="page-header">
   <a class="nav-back" href="index.html">← The Krakens</a>
-  <div class="page-title" data-lang="fr" style="display:block">📸 Galerie Photos</div>
-  <div class="page-title" data-lang="en">📸 Photo Gallery</div>
-  <div class="lang-switcher">
-    <button class="lang-btn active" onclick="setLang('fr')">FR</button>
-    <button class="lang-btn" onclick="setLang('en')">EN</button>
-  </div>
+  <div class="page-title">📸 Galerie Photos</div>
 </div>
 
-<!-- HERO -->
 <div class="gallery-hero">
   <h1>THE KRAKENS</h1>
-  <p data-lang="fr" style="display:block">Galerie Photos · Concerts & Backstage</p>
-  <p data-lang="en">Photo Gallery · Concerts & Backstage</p>
+  <p>Galerie · Concerts &amp; Backstage &amp; Studio</p>
 </div>
 
 <div class="content">
-
-  <!-- FILTRES -->
   <div class="filter-tabs">
-    <button class="filter-btn active" onclick="filterPhotos('all', this)" data-fr="Toutes" data-en="All">Toutes</button>
-    <button class="filter-btn" onclick="filterPhotos('concert', this)" data-fr="Concerts" data-en="Concerts">Concerts</button>
-    <button class="filter-btn" onclick="filterPhotos('backstage', this)" data-fr="Backstage" data-en="Backstage">Backstage</button>
-    <button class="filter-btn" onclick="filterPhotos('studio', this)" data-fr="Studio" data-en="Studio">Studio</button>
+    <button class="filter-btn active" onclick="filterPhotos('all',this)">Toutes</button>
+    <button class="filter-btn" onclick="filterPhotos('concert',this)">Concerts</button>
+    <button class="filter-btn" onclick="filterPhotos('backstage',this)">Backstage</button>
+    <button class="filter-btn" onclick="filterPhotos('studio',this)">Studio</button>
   </div>
-
-  <!-- GRILLE PHOTOS -->
-  <div class="photo-grid" id="photo-grid">
-    <!-- Les photos sont chargées depuis le dossier photos/ -->
-    <!-- Ajoute tes photos dans le dossier photos/ sur GitHub -->
-    <!-- Puis liste-les dans le tableau JS ci-dessous -->
-  </div>
-
+  <div class="photo-count" id="photo-count"></div>
+  <div class="photo-grid" id="photo-grid"></div>
 </div>
 
-<!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" onclick="closeLightboxOutside(event)">
   <button class="lightbox-close" onclick="closeLightbox()">✕</button>
   <button class="lightbox-nav lightbox-prev" onclick="navigatePhoto(-1)">‹</button>
-  <img class="lightbox-img" id="lightbox-img" src="" alt="" />
+  <img class="lightbox-img" id="lightbox-img" src="" alt=""/>
   <div class="lightbox-caption" id="lightbox-caption"></div>
   <button class="lightbox-nav lightbox-next" onclick="navigatePhoto(1)">›</button>
   <div class="lightbox-counter" id="lightbox-counter"></div>
 </div>
 
 <script>
-  // ══════════════════════════════════════════════
-  // 📸 AJOUTE TES PHOTOS ICI
-  // Après avoir uploadé tes photos dans le dossier
-  // photos/ sur GitHub, ajoute-les dans ce tableau.
-  //
-  // Format :
-  // { src: 'photos/nom_du_fichier.jpg', caption: 'Description', category: 'concert' }
-  //
-  // Catégories disponibles : concert, backstage, studio
-  // ══════════════════════════════════════════════
-  const photos = [
-    { src: 'images/krakens.jpg',  caption: 'The Krakens · Live',    category: 'concert'   },
-    { src: 'images/glyn.jpg',     caption: 'Glyn · Chant',          category: 'concert'   },
-    { src: 'images/phil.jpg',     caption: 'Phil · Guitare',         category: 'concert'   },
-    { src: 'images/bob.jpg',      caption: 'Bob · Batterie',         category: 'concert'   },
-    { src: 'images/ned.jpg',      caption: 'Ned · Basse',            category: 'concert'   },
-     { src: 'photos/ned.jpg',      caption: 'Ned · Basse',            category: 'concert'   },
-    // Ajoute tes photos ici :
-    // { src: 'photos/concert_lyon.jpg', caption: 'Concert Lyon 2025', category: 'concert' },
-    // { src: 'photos/backstage1.jpg',   caption: 'Backstage',         category: 'backstage' },
-    // { src: 'photos/studio1.jpg',      caption: 'En studio',         category: 'studio' },
-  ];
 
-  let currentFilter = 'all';
-  let currentIndex = 0;
-  let filteredPhotos = [];
+// ╔══════════════════════════════════════════════════════════╗
+// ║  AJOUTE TES PHOTOS ICI — très simple !                  ║
+// ║                                                          ║
+// ║  1. Upload ta photo dans le dossier "photos/" sur GitHub ║
+// ║  2. Ajoute une ligne ci-dessous :                        ║
+// ║     ['photos/nom_fichier.jpg', 'concert'],               ║
+// ║     ['photos/nom_fichier.jpg', 'backstage'],             ║
+// ║     ['photos/nom_fichier.jpg', 'studio'],                ║
+// ║                                                          ║
+// ║  C'est tout ! Pas besoin de caption ni d'autre chose.    ║
+// ╚══════════════════════════════════════════════════════════╝
 
-  // ── Rendu de la grille ──
-  function renderGrid(filter) {
-    currentFilter = filter;
-    filteredPhotos = filter === 'all' ? photos : photos.filter(p => p.category === filter);
-    const grid = document.getElementById('photo-grid');
+const PHOTOS = [
+  // Photos existantes
+  ['images/krakens.jpg', 'concert'],
+  ['images/glyn.jpg',    'concert'],
+  ['images/phil.jpg',    'concert'],
+  ['images/bob.jpg',     'concert'],
+  ['images/ned.jpg',     'concert'],
+
+  // ── AJOUTE TES NOUVELLES PHOTOS ICI ──
+  // ['photos/concert1.jpg',   'concert'],
+  // ['photos/concert2.jpg',   'concert'],
+  // ['photos/backstage1.jpg', 'backstage'],
+  // ['photos/studio1.jpg',    'studio'],
+];
+
+// ── Le reste du code — ne pas modifier ──
+let currentFilter = 'all';
+let currentIndex = 0;
+let filtered = [];
+
+function caption(src) {
+  const f = src.split('/').pop().replace(/\.[^.]+$/, '').replace(/[-_]/g, ' ');
+  return f.charAt(0).toUpperCase() + f.slice(1);
+}
+
+function renderGrid(filter) {
+  currentFilter = filter;
+  filtered = filter === 'all' ? PHOTOS : PHOTOS.filter(p => p[1] === filter);
+  const grid = document.getElementById('photo-grid');
+  const count = document.getElementById('photo-count');
+  grid.innerHTML = '';
+  count.textContent = filtered.length > 0 ? filtered.length + ' photo' + (filtered.length > 1 ? 's' : '') : '';
+
+  if (filtered.length === 0) {
     grid.innerHTML = '';
-
-    if (filteredPhotos.length === 0) {
-      grid.innerHTML = `
-        <div class="empty-state" style="grid-column:1/-1">
-          <div class="icon">📷</div>
-          <p>Aucune photo dans cette catégorie.<br/>
-          Uploade tes photos dans <code>photos/</code> sur GitHub<br/>
-          puis ajoute-les dans le tableau JS de <code>galerie.html</code></p>
-        </div>`;
-      return;
-    }
-
-    filteredPhotos.forEach((photo, i) => {
-      const item = document.createElement('div');
-      item.className = 'photo-item';
-      item.setAttribute('data-category', photo.category);
-      item.innerHTML = `
-        <img src="${photo.src}" alt="${photo.caption}" loading="lazy" />
-        <div class="photo-overlay">
-          <span class="photo-caption">${photo.caption}</span>
-        </div>
-      `;
-      item.addEventListener('click', () => openLightbox(i));
-      grid.appendChild(item);
-    });
+    return;
   }
 
-  function filterPhotos(filter, btn) {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    renderGrid(filter);
-  }
-
-  // ── Lightbox ──
-  function openLightbox(index) {
-    currentIndex = index;
-    updateLightbox();
-    document.getElementById('lightbox').classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function updateLightbox() {
-    const photo = filteredPhotos[currentIndex];
-    document.getElementById('lightbox-img').src = photo.src;
-    document.getElementById('lightbox-img').alt = photo.caption;
-    document.getElementById('lightbox-caption').textContent = photo.caption;
-    document.getElementById('lightbox-counter').textContent =
-      (currentIndex + 1) + ' / ' + filteredPhotos.length;
-  }
-
-  function navigatePhoto(dir) {
-    currentIndex = (currentIndex + dir + filteredPhotos.length) % filteredPhotos.length;
-    updateLightbox();
-  }
-
-  function closeLightbox() {
-    document.getElementById('lightbox').classList.remove('open');
-    document.body.style.overflow = '';
-  }
-
-  function closeLightboxOutside(e) {
-    if (e.target === document.getElementById('lightbox')) closeLightbox();
-  }
-
-  document.addEventListener('keydown', e => {
-    if (!document.getElementById('lightbox').classList.contains('open')) return;
-    if (e.key === 'Escape')      closeLightbox();
-    if (e.key === 'ArrowRight')  navigatePhoto(1);
-    if (e.key === 'ArrowLeft')   navigatePhoto(-1);
+  filtered.forEach(([src], i) => {
+    const item = document.createElement('div');
+    item.className = 'photo-item';
+    item.innerHTML = `<img src="${src}" alt="${caption(src)}" loading="lazy"/><div class="photo-overlay"><span class="photo-caption">${caption(src)}</span></div>`;
+    item.addEventListener('click', () => openLightbox(i));
+    grid.appendChild(item);
   });
+}
 
-  // ── Langue ──
-  function setLang(lang) {
-    document.querySelectorAll('[data-lang]').forEach(el => el.classList.toggle('visible', el.dataset.lang === lang));
-    document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.toggle('active', btn.textContent.toLowerCase() === lang));
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-      if (btn.dataset[lang]) btn.textContent = btn.dataset[lang];
-    });
-  }
+function filterPhotos(filter, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderGrid(filter);
+}
 
-  // ── Init ──
-  renderGrid('all');
+function openLightbox(i) {
+  currentIndex = i;
+  updateLightbox();
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function updateLightbox() {
+  const [src] = filtered[currentIndex];
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox-caption').textContent = caption(src);
+  document.getElementById('lightbox-counter').textContent = (currentIndex+1) + ' / ' + filtered.length;
+}
+
+function navigatePhoto(dir) {
+  currentIndex = (currentIndex + dir + filtered.length) % filtered.length;
+  updateLightbox();
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeLightboxOutside(e) {
+  if (e.target === document.getElementById('lightbox')) closeLightbox();
+}
+
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('lightbox').classList.contains('open')) return;
+  if (e.key === 'Escape')     closeLightbox();
+  if (e.key === 'ArrowRight') navigatePhoto(1);
+  if (e.key === 'ArrowLeft')  navigatePhoto(-1);
+});
+
+renderGrid('all');
 </script>
 </body>
 </html>
