@@ -101,6 +101,28 @@
     .pb-btn { display: flex; align-items: center; gap: 6px; background: transparent; border: 1px solid var(--border-hover); border-radius: 3px; padding: 7px 12px; color: var(--text-muted); font-family: 'Barlow', sans-serif; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: all 0.2s; }
     .pb-btn:hover { border-color: var(--green-mid); color: var(--green-bright); }
     .pb-btn.active { border-color: var(--green-mid); color: var(--green-bright); background: rgba(90,200,60,0.08); }
+
+    /* CONCERTS */
+    .next-concert { width: 100%; max-width: 800px; display: flex; align-items: center; gap: 18px; background: linear-gradient(90deg, rgba(90,200,60,0.12), rgba(90,200,60,0.03)); border: 1px solid var(--green-mid); border-radius: 6px; padding: 16px 20px; cursor: pointer; text-decoration: none; color: inherit; }
+    .next-concert:hover { background: rgba(90,200,60,0.16); }
+    .nc-label { font-family: 'Black Han Sans', sans-serif; font-size: 11px; letter-spacing: 3px; color: var(--green-mid); text-transform: uppercase; }
+    .nc-title { font-size: 17px; font-weight: 600; color: var(--green-bright); margin-top: 2px; }
+    .nc-sub { font-size: 13px; color: var(--text-secondary); margin-top: 2px; }
+    .nc-count { margin-left: auto; text-align: center; font-family: 'Black Han Sans', sans-serif; color: var(--green-bright); font-size: 14px; letter-spacing: 1px; white-space: nowrap; border-left: 1px solid #1e3e1e; padding-left: 18px; }
+    .concert-list { display: flex; flex-direction: column; gap: 22px; max-width: 860px; }
+    .concert-card { display: flex; gap: 22px; background: var(--bg-mid); border: 1px solid var(--border); border-radius: 6px; padding: 18px; }
+    .concert-card:hover { border-color: var(--border-hover); }
+    .concert-poster { width: 210px; flex-shrink: 0; border-radius: 4px; border: 1px solid var(--border); display: block; }
+    .concert-info { flex: 1; min-width: 0; }
+    .concert-date { font-family: 'Black Han Sans', sans-serif; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--green-mid); }
+    .concert-count { display: inline-block; margin-left: 10px; font-size: 11px; letter-spacing: 1px; color: var(--bg-deep); background: var(--green-bright); padding: 2px 8px; border-radius: 2px; font-family: 'Barlow', sans-serif; font-weight: 600; }
+    .concert-title { font-size: 20px; font-weight: 600; color: var(--text-primary); margin: 8px 0 4px; line-height: 1.3; }
+    .concert-venue { font-size: 15px; color: var(--green-bright); }
+    .concert-addr { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+    .concert-note { font-size: 13px; color: var(--text-secondary); margin-top: 10px; line-height: 1.6; }
+    .concert-links { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+    .concert-empty { color: var(--text-muted); font-size: 14px; line-height: 1.8; padding: 30px 0; }
+    @media (max-width: 600px) { .concert-card { flex-direction: column; } .concert-poster { width: 100%; max-width: 320px; } .next-concert { flex-wrap: wrap; } .nc-count { margin-left: 0; border-left: none; padding-left: 0; } }
   </style>
 </head>
 <body>
@@ -141,6 +163,7 @@
 
 <nav class="nav-tabs">
   <div class="nav-tab active" onclick="showSection('accueil',this)">Accueil</div>
+  <div class="nav-tab" onclick="showSection('concerts',this)">Concerts</div>
   <div class="nav-tab" onclick="showSection('videos',this)">Vidéos</div>
   <div class="nav-tab" onclick="showSection('music',this)">Musique</div>
   <div class="nav-tab" onclick="showSection('bio',this)">Biographies</div>
@@ -153,6 +176,7 @@
   <!-- ACCUEIL -->
   <section id="sec-accueil" class="section active">
     <div style="display:flex;flex-direction:column;align-items:center;gap:32px;padding:20px 0 40px;">
+      <div id="next-concert-banner" style="width:100%;max-width:800px;"></div>
       <div style="width:100%;max-width:800px;border-radius:6px;overflow:hidden;border:1px solid #1e3e1e;box-shadow:0 0 40px rgba(90,200,60,0.08);">
         <img src="images/hero.jpg" alt="Les Krakens" style="width:100%;display:block;object-fit:cover;max-height:500px;object-position:center 20%;" />
       </div>
@@ -174,6 +198,12 @@
         <a href="EPK_TheKrakens.pdf" target="_blank" class="about-link" style="border-color:#5ac83c;color:#5ac83c;">📄 EPK</a>
       </div>
     </div>
+  </section>
+
+  <!-- CONCERTS -->
+  <section id="sec-concerts" class="section">
+    <div class="section-title"><span>Prochains concerts</span></div>
+    <div class="concert-list" id="concert-list"></div>
   </section>
 
   <!-- VIDEOS -->
@@ -389,6 +419,82 @@
       { title: 'Samurai',            url: 'audio/Samurai.mp3',            album: 'Les Krakens' },
     ].forEach(t => addTrackCard(t.title, t.url, t.album));
   });
+
+
+  // ══════════════════════════════════════════════
+  // CONCERTS — ajoute une ligne par concert ici.
+  // Format date : 'AAAA-MM-JJ'. Un concert passé disparaît tout seul.
+  // ══════════════════════════════════════════════
+  const CONCERTS = [
+    {
+      date: '2026-11-21', time: '20h30',
+      title: 'The Krakens en concert',
+      venue: "L'Étoile du Rock", address: '20 route de St Vincent, Montret (71440)',
+      note: 'Concert de 1h30 · Réservations : 07 77 98 20 34',
+      poster: 'images/affiche_montret.png',
+      links: [{ label: 'Événement / Groupe Facebook', url: 'https://www.facebook.com/groups/534038956806240' }]
+    },
+    {
+      date: '2026-12-11', time: '',
+      title: 'En première partie de One Night Only (tribute Thin Lizzy)',
+      venue: 'Overdrive Café', address: "St-Symphorien-d'Ozon",
+      note: 'OEM Friends présente · Entrée 12 €',
+      poster: 'images/affiche_overdrive.png',
+      links: [{ label: 'Billetterie', url: 'https://overeighteenmotors.com' }]
+    },
+    // ── Concert d'avril : décommente et complète quand l'affiche est prête ──
+    // {
+    //   date: '2027-04-XX', time: '',
+    //   title: '', venue: '', address: '', note: '',
+    //   poster: 'images/affiche_avril.png',
+    //   links: [{ label: 'Infos', url: '' }]
+    // },
+  ];
+
+  function concertDate(c) { const [y, m, d] = c.date.split('-').map(Number); return new Date(y, m - 1, d); }
+  function upcomingConcerts() {
+    const today = new Date(); today.setHours(0, 0, 0, 0);
+    return CONCERTS.filter(c => !isNaN(concertDate(c)) && concertDate(c) >= today).sort((a, b) => concertDate(a) - concertDate(b));
+  }
+  function countdownText(c) {
+    const today = new Date(); today.setHours(0, 0, 0, 0);
+    const n = Math.round((concertDate(c) - today) / 86400000);
+    return n === 0 ? "Aujourd'hui" : n === 1 ? 'Demain' : 'Dans ' + n + ' jours';
+  }
+  function dateLabel(c) {
+    const s = concertDate(c).toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+    return s + (c.time ? ' · ' + c.time : '');
+  }
+  function esc(s) { return String(s || '').replace(/[&<>"]/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[ch])); }
+
+  function renderConcerts() {
+    const list = upcomingConcerts();
+    const box = document.getElementById('concert-list');
+    if (box) {
+      box.innerHTML = list.length ? list.map(c => `
+        <article class="concert-card">
+          ${c.poster ? `<a href="${esc(c.poster)}" target="_blank" rel="noopener"><img class="concert-poster" src="${esc(c.poster)}" alt="Affiche ${esc(c.venue)}" loading="lazy" /></a>` : ''}
+          <div class="concert-info">
+            <div class="concert-date">${esc(dateLabel(c))}<span class="concert-count">${esc(countdownText(c))}</span></div>
+            <div class="concert-title">${esc(c.title)}</div>
+            <div class="concert-venue">${esc(c.venue)}</div>
+            <div class="concert-addr">${esc(c.address)}</div>
+            ${c.note ? `<div class="concert-note">${esc(c.note)}</div>` : ''}
+            ${(c.links || []).length ? `<div class="concert-links">${c.links.map(l => `<a class="about-link" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)}</a>`).join('')}</div>` : ''}
+          </div>
+        </article>`).join('')
+        : '<p class="concert-empty">Aucune date annoncée pour le moment.<br/>Suivez-nous sur Facebook et Instagram pour être prévenus !</p>';
+    }
+    const banner = document.getElementById('next-concert-banner');
+    if (banner) {
+      if (!list.length) { banner.innerHTML = ''; return; }
+      const n = list[0];
+      banner.innerHTML = `<a class="next-concert" href="#" onclick="showSection('concerts', document.querySelectorAll('.nav-tab')[1]); return false;">
+        <div><div class="nc-label">Prochain concert</div><div class="nc-title">${esc(n.venue)}</div><div class="nc-sub">${esc(dateLabel(n))} · ${esc(n.address)}</div></div>
+        <div class="nc-count">${esc(countdownText(n))}</div></a>`;
+    }
+  }
+  document.addEventListener('DOMContentLoaded', renderConcerts);
 
   function fmt(s) { const t = Math.floor(s); return Math.floor(t/60) + ':' + String(t%60).padStart(2,'0'); }
 </script>
